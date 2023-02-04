@@ -14,6 +14,9 @@ public class PanelInventory : InventoryPanel
         if (!grid || grid.childCount <= 0)
             return;
 
+        for (int i = 0; i < InventoryController.Instance.hotbar.grid.childCount; i++)
+            m_slots.Add(InventoryController.Instance.hotbar.grid.GetChild(i).GetComponent<Slot>());
+
         for (int i = 0; i < grid.childCount; i++)
             m_slots.Add(grid.GetChild(i).GetComponent<Slot>());
     }
