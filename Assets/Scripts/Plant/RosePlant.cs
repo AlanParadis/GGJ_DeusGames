@@ -24,7 +24,7 @@ public class RosePlant : Plant
     }
     public void RoseHit()
     {
-        m_playerHealth.health -= damage;
+        m_playerHealth.TakeDamage(damage);
     }
 
     protected override void DoPlantAction()

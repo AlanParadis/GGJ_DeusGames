@@ -10,7 +10,7 @@ public class FirePlant : Plant
         
         if (Vector3.Distance(transform.position, m_playerController.transform.position) <= distMin)
         {
-            m_playerHealth.health -= damage;
+            m_playerHealth.TakeDamage(damage);
         }
     }
 }
