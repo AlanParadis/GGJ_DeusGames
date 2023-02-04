@@ -31,7 +31,7 @@ public class SoilBall : MonoBehaviour
             Gatherable.GatherableItem it;
             it.chance = 100;
             it.dropAmount = 1;
-            it.resource = Instantiate(InventoryController.Instance.hotbar.EquippedItem);
+            it.resource = Instantiate(item);
 
             go.transform.position = hit.point;
             go.GetComponent<Gatherable>().itemPool.Clear();
