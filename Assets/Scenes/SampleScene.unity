@@ -8317,11 +8317,6 @@ PrefabInstance:
       propertyPath: inventoryController
       value: 
       objectReference: {fileID: 118877699}
-    - target: {fileID: 5613247793995582723, guid: d6e1ef0523fa78e45bc2771307f9366c,
-        type: 3}
-      propertyPath: interactionLayers.m_Bits
-      value: 72
-      objectReference: {fileID: 0}
     - target: {fileID: 5613247793995582724, guid: d6e1ef0523fa78e45bc2771307f9366c,
         type: 3}
       propertyPath: m_Name

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2922072339272415443}
   - component: {fileID: 2922072339272415442}
   - component: {fileID: 2922072339272415405}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 2922072339382166471}
   - component: {fileID: 2922072339382166470}
   - component: {fileID: 2922072339382166465}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3102,7 +3102,7 @@ GameObject:
   - component: {fileID: 2922072340286617810}
   - component: {fileID: 61430722}
   - component: {fileID: 61430721}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePlant
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -3210,7 +3210,7 @@ GameObject:
   - component: {fileID: 2922072341029693295}
   - component: {fileID: 2922072341029693294}
   - component: {fileID: 2922072341029693289}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24576,7 +24576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5328545125895599411}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LifebarTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

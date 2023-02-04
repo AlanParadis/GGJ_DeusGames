@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2358034131297757983}
   - component: {fileID: 2358034131297757980}
   - component: {fileID: 2358034131297757981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 2173682161942952302}
   - component: {fileID: 160496663}
   - component: {fileID: 160496662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LovePlant
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 2358034132531985807}
   - component: {fileID: 2358034132531985804}
   - component: {fileID: 2358034132531985805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22324,7 +22324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8910649282631816010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LifebarTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 332321026732285641}
   - component: {fileID: 3175580317371809241}
   - component: {fileID: 3175580317371809242}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RadPlant
   m_TagString: Plant
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 332321027307848052}
   - component: {fileID: 332321027307848053}
   - component: {fileID: 332321027307848050}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21490,7 +21490,7 @@ GameObject:
   - component: {fileID: 332321027731349192}
   - component: {fileID: 332321027731349193}
   - component: {fileID: 332321027731349174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22308,7 +22308,7 @@ GameObject:
   - component: {fileID: 332321027908175324}
   - component: {fileID: 332321027908175325}
   - component: {fileID: 332321027908175322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24576,7 +24576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1843433511447754598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LifebarTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

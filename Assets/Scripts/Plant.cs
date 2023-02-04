@@ -29,6 +29,7 @@ public class Plant : MonoBehaviour, IInteractable
     [SerializeField] public float cdCoin;
     [SerializeField] public int photocoin;
 
+    private bool CanInteract => isWild && isStunned;
     
     virtual protected void Awake()
     {
@@ -80,7 +81,7 @@ public class Plant : MonoBehaviour, IInteractable
     public void TakeDamage(int _damage)
     {
         pv -= _damage;
-        if (pv < 0.0f)
+        if (pv <= 0.0f)
         {
             SetStunned();
         }
@@ -120,8 +121,11 @@ public class Plant : MonoBehaviour, IInteractable
     #region Interactible
     public void DoInteraction()
     {
-        if (!isWild)
+        if (!CanInteract)
             return;
+
+        Destroy(m_lifebar.gameObject);
+        
         Item it = InventoryController.Instance.inventory.AddItem(item);
 
         if (it == null)
@@ -132,8 +136,9 @@ public class Plant : MonoBehaviour, IInteractable
 
     public void SetInteractionText()
     {
-        if (!isWild)
+        if (!CanInteract)
             return;
+        
         ActionUI.Instance.SetVisible();
 
         ActionUI.Instance.SetText($"Press E to pick {item.displayName}");

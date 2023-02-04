@@ -629,7 +629,7 @@ MonoBehaviour:
   runTransitionSpeed: 8
   interactionLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 200
   currentStamina: 0
   maxStamina: 100
   runStaminaLoseAmount: 15
