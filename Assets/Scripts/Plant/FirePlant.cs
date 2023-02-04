@@ -5,7 +5,6 @@ using UnityEngine;
 public class FirePlant : MonoBehaviour, IInteractable
 {
     Animator anim;
-    bool isSauvage;
     [SerializeField] Item item;
     [SerializeField] GameObject player;
     [SerializeField] float distMin;
@@ -15,6 +14,8 @@ public class FirePlant : MonoBehaviour, IInteractable
 
     public void DoInteraction()
     {
+        if (!GetComponent<PlantScript>().isSauvage)
+            return;
         Item it = InventoryController.Instance.inventory.AddItem(item);
 
         if (it == null)
@@ -25,6 +26,8 @@ public class FirePlant : MonoBehaviour, IInteractable
 
     public void SetInteractionText()
     {
+        if (!GetComponent<PlantScript>().isSauvage)
+            return;
         ActionUI.Instance.SetVisible();
 
         ActionUI.Instance.SetText($"Press E to pick {item.displayName}");
@@ -33,12 +36,12 @@ public class FirePlant : MonoBehaviour, IInteractable
     {
         actualcd = 0f;
         item.currentStackAmount = 1;
+        GetComponent<PlantScript>().isSauvage = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        isSauvage = true;
         //anim = GetComponent<Animator>();
         //anim.SetFloat("Dist", int.MaxValue);
     }
@@ -46,6 +49,8 @@ public class FirePlant : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
+        if (!GetComponent<PlantScript>().isSauvage)
+            return;
         if (actualcd >= 0)
             actualcd -= Time.deltaTime;
 

@@ -15,12 +15,13 @@ MonoBehaviour:
   id: FireFlower
   displayName: Fire Flower
   description: a fire Flower
-  icon: {fileID: 21300000, guid: a2b4316c674e8304084390994de3c0a1, type: 3}
+  icon: {fileID: 21300000, guid: 58e6d3dcd6e06b9439485e458b9e1b6c, type: 3}
   data: 
   inHandObject: {fileID: 7102374006042501026, guid: e0d54ffe6a8571a4bb2554f428b76b05,
     type: 3}
   onFloorObject: {fileID: 2922072340286617772, guid: 28807dc3297e0f14a923c3ae7cffe536,
     type: 3}
+  plantGO: {fileID: 2922072340286617772, guid: 28807dc3297e0f14a923c3ae7cffe536, type: 3}
   maxStackAmount: 1
   currentStackAmount: 1
   maxDurability: 0

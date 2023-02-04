@@ -13,6 +13,7 @@ public class Item : ScriptableObject
     public string data;
     public GameObject inHandObject;
     public GameObject onFloorObject;
+    public GameObject plantGO;
 
     [Header("Stack")]
     public int maxStackAmount;

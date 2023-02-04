@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 2173682161942952302}
   - component: {fileID: 160496663}
   - component: {fileID: 160496662}
+  - component: {fileID: 8340309131458463732}
   m_Layer: 0
   m_Name: LovePlant
   m_TagString: Plant
@@ -913,7 +914,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &160496662
 BoxCollider:
@@ -936,6 +937,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1350842, y: 0.8854778, z: 0.13180494}
   m_Center: {x: 0.00035669655, y: 0.4429115, z: 0.0026614666}
+--- !u!114 &8340309131458463732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358034131440865995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSauvage: 0
 --- !u!1 &2358034132531985800
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,10 @@ public class LovePlant : MonoBehaviour, IInteractable
 
     public void DoInteraction()
     {
-       Item it = InventoryController.Instance.inventory.AddItem(item);
+        isSauvage = GetComponent<PlantScript>().isSauvage;
+        if (!isSauvage)
+            return;
+        Item it = InventoryController.Instance.inventory.AddItem(item);
        
        if (it == null)
            Destroy(gameObject);
@@ -22,20 +25,22 @@ public class LovePlant : MonoBehaviour, IInteractable
 
     public void SetInteractionText()
     {
+        isSauvage = GetComponent<PlantScript>().isSauvage;
+        if (!isSauvage)
+            return;
         ActionUI.Instance.SetVisible();
 
         ActionUI.Instance.SetText($"Press E to pick {item.displayName}");
     }
     private void Awake()
     {
-
         item.currentStackAmount = 1;
+        GetComponent<PlantScript>().isSauvage = true;
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        isSauvage = true;
         anim = GetComponent<Animator>();
         anim.SetFloat("Dist", int.MaxValue);
     }
@@ -43,6 +48,9 @@ public class LovePlant : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
+        isSauvage = GetComponent<PlantScript>().isSauvage;
+        if (!isSauvage)
+            return;
         anim.SetFloat("Dist", Vector3.Distance(transform.position, player.position));
     }
 }

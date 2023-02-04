@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 
@@ -17,48 +18,47 @@ public class Plot : MonoBehaviour
 {
     [SerializeField] public PlotInteract plotInteract;
 
-    [SerializeField] List<PlantPlotUpgrades> plotUpgrades;
-    [SerializeField] List<FarmPlotUpgrades> farmPlotUpgrades;
+    [SerializeField] public List<PlantPlotUpgrades> plotUpgrades;
+    [SerializeField] public List<FarmPlotUpgrades> farmPlotUpgrades;
 
     public PlotState plotState;
 
-    [SerializeField]GameObject NutrimentPrefab;
-    [SerializeField]GameObject PlantPrefab;
+    [SerializeField]public GameObject NutrimentPrefab;
+    [SerializeField]public GameObject PlantPrefab;
 
-    Item item;
+    public Item item;
 
     [Header("Farm")]
-    [SerializeField] float farmGrowRate;
+    [SerializeField] public float farmGrowRate;
     float farmGrowTimer;
     // production rate of 0.1 represent a  10% chance of producing another nutriment
-    [SerializeField] float farmProductionRate;
+    [SerializeField] public float farmProductionRate;
 
     [Header("Plant")]
-    [SerializeField] float plantGrowRate;
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] public float plantGrowRate;
     float plantGrowTimer;
 
+    [SerializeField] public int limitPlant;
+    int actualPlant;
 
     // Start is called before the first frame update
     void Start()
     {
         plotState = PlotState.Empty;
-        SetFarmMode(null);
+        actualPlant = 0;
     }
-    
-    public void SetPlantMode(Item _item)
+    public void AddPlant(Item _item)
     {
-        plotState = PlotState.Plant;
         foreach (PlantPlotUpgrades upgrade in plotUpgrades)
         {
             plantGrowRate = 1;
         }
         item = _item;
-        PlantPrefab = item.onFloorObject;
+        PlantPrefab = item.plantGO;
     }
-
-    public void SetFarmMode(Item _item)
+    public void AddFarm(Item _item)
     {
-        plotState = PlotState.Farm;
         foreach (FarmPlotUpgrades upgrade in farmPlotUpgrades)
         {
             farmGrowRate += upgrade.nutrimentProductionSpeedModifier;
@@ -67,7 +67,7 @@ public class Plot : MonoBehaviour
         item = _item;
     }
 
-    void PlantUdate()
+    void PlantUpdate()
     {
         plantGrowTimer += Time.deltaTime;
         if (plantGrowTimer >= plantGrowRate)
@@ -75,13 +75,17 @@ public class Plot : MonoBehaviour
             plantGrowTimer = 0;
 
             // spawn plant
-            if (PlantPrefab == null)
+            if (PlantPrefab != null && actualPlant < limitPlant)
             {
+                actualPlant++;
                 // cube for now
-                GameObject plant = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Vector3 tempPos = new Vector3(spawnPoint.position.x + Random.insideUnitCircle.x * 0.5f, spawnPoint.position.y, spawnPoint.position.z + Random.insideUnitCircle.y * 0.5f);
+                GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
+                plant.GetComponent<PlantScript>().isSauvage = false;
                 // scale down
                 plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
             }
+
         }
     }
 
@@ -113,9 +117,9 @@ public class Plot : MonoBehaviour
             if (NutrimentPrefab == null)
             {
                 // cube for now
-                GameObject nutriment = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                //GameObject nutriment = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 // scale down
-                nutriment.transform.localScale = new Vector3(0.35f, 0.25f, 0.35f);
+                //nutriment.transform.localScale = new Vector3(0.35f, 0.25f, 0.35f);
             }
         }
     }
@@ -128,7 +132,7 @@ public class Plot : MonoBehaviour
             case PlotState.Empty:
                 break;
             case PlotState.Plant:
-                PlantUdate();
+                PlantUpdate();
                 break;
             case PlotState.Farm:
                 FarmUpdate();
