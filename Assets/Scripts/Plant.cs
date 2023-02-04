@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
+    public float cdCoin;
+    public bool isSauvage = true;
+    public int photocoin;
     [SerializeField] private Transform lifeBarTransform;
 
     private PlayerController m_playerController;

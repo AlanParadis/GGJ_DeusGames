@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlantScript : MonoBehaviour
 {
-    public float cdCoin;
-    public bool isSauvage = true;
-    public int photocoin;
     // Start is called before the first frame update
     void Start()
     {
