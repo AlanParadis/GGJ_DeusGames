@@ -14,7 +14,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
     [SerializeField] Canvas upgradeWindow;
     
     public List<PlantPlotUpgrades> PlantUpgrades;
-    public List<PlantPlotUpgrades> FarmUpgrades;
+    public List<FarmPlotUpgrades> FarmUpgrades;
     
     // Start is called before the first frame update
     void Start()
@@ -24,8 +24,17 @@ public class PlotInteract : MonoBehaviour, IInteractable
         addDirtWindow.gameObject.SetActive(false);
         upgradeWindow.gameObject.SetActive(false);
 
-        PlantUpgrades = ((PlantPlotUpgrades[])Resources.LoadAll("PlantUpgrade", typeof(PlantPlotUpgrades))).ToList();
-        FarmUpgrades = ((PlantPlotUpgrades[])Resources.LoadAll("FarmUpgrade", typeof(FarmPlotUpgrades))).ToList();
+        var UpgradeObjects = Resources.LoadAll("PlantUpgrade", typeof(PlantPlotUpgrades));
+        foreach (var upgrade in UpgradeObjects)
+        {
+            PlantUpgrades.Add(upgrade as PlantPlotUpgrades);
+        }
+        UpgradeObjects = Resources.LoadAll("FarmUpgrade", typeof(FarmPlotUpgrades));
+        foreach (var upgrade in UpgradeObjects)
+        {
+            FarmUpgrades.Add(upgrade as FarmPlotUpgrades);
+        }
+
     }
 
     // Update is called once per frame
