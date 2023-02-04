@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class IceProjectiles : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject target;
     [SerializeField] float speed;
     [SerializeField] float dammage;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
-        transform.LookAt(player.transform);
+        transform.LookAt(target.transform);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -25,7 +25,11 @@ public class IceProjectiles : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(dammage);
+            target.GetComponent<PlayerHealth>().TakeDamage(dammage);
+        }
+        else if (collision.transform.tag == "Plant")
+        {
+            target.GetComponent<Plant>().TakeDamage(dammage);
         }
         Destroy(gameObject);
     }

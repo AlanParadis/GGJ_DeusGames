@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7435310976069733337}
   - component: {fileID: 7435310976069733338}
   - component: {fileID: 8847093340404356714}
+  - component: {fileID: 4089802413662279445}
   m_Layer: 7
   m_Name: RosePlant
   m_TagString: Plant
@@ -129,6 +130,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &4089802413662279445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738376197547321527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92aa0c0b1bf46ac4daeb0c64f257fadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  plantType: 1
+  ennemyType: 00000000020000000300000004000000
+  targets: []
 --- !u!1 &5738376197768476528
 GameObject:
   m_ObjectHideFlags: 0
@@ -21513,8 +21532,7 @@ GameObject:
   - component: {fileID: 5738376198250312669}
   - component: {fileID: 5738376198250312666}
   - component: {fileID: 8847093339567148296}
-  - component: {fileID: 8847093339567148297}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23794,33 +23812,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.5000012
   m_Center: {x: 0, y: 0, z: 0.000000029802322}
---- !u!54 &8847093339567148297
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5738376198250312664}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &5738376198695282868
 GameObject:
   m_ObjectHideFlags: 0

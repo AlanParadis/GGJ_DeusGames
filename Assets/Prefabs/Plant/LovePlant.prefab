@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2358034131297757983}
   - component: {fileID: 2358034131297757980}
   - component: {fileID: 2358034131297757981}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,6 +831,7 @@ GameObject:
   - component: {fileID: 2173682161942952302}
   - component: {fileID: 160496663}
   - component: {fileID: 160496662}
+  - component: {fileID: 845403114384559530}
   m_Layer: 7
   m_Name: LovePlant
   m_TagString: Plant
@@ -945,6 +946,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1350842, y: 0.8854778, z: 0.13180494}
   m_Center: {x: 0.00035669655, y: 0.4429115, z: 0.0026614666}
+--- !u!114 &845403114384559530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2358034131440865995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92aa0c0b1bf46ac4daeb0c64f257fadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  plantType: 0
+  ennemyType: 
+  targets: []
 --- !u!1 &2358034132531985800
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +977,7 @@ GameObject:
   - component: {fileID: 2358034132531985807}
   - component: {fileID: 2358034132531985804}
   - component: {fileID: 2358034132531985805}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

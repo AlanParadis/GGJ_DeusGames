@@ -12,8 +12,8 @@ public class Plant : MonoBehaviour, IInteractable
     protected PlayerHealth m_playerHealth;
     private PlantLifebar m_lifebar;
 
-    [SerializeField] protected int pv;
-    [SerializeField] protected int maxPv;
+    [SerializeField] protected float pv;
+    [SerializeField] protected float maxPv;
 
     protected bool isStunned = false;
     public bool isWild = true;
@@ -90,8 +90,20 @@ public class Plant : MonoBehaviour, IInteractable
         {
             SetStunned();
         }
-        
-        m_lifebar.SetFillAmount((float)pv / maxPv);
+
+        if (m_lifebar != null)
+            m_lifebar.SetFillAmount(pv / maxPv);
+    }
+    public void TakeDamage(float _damage)
+    {
+        pv -= _damage;
+        if (pv <= 0.0f)
+        {
+            SetStunned();
+        }
+
+        if(m_lifebar != null)
+            m_lifebar.SetFillAmount(pv / maxPv);
     }
 
     private void ShowLifebar()

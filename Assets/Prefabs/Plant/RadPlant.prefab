@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 332321026732285641}
   - component: {fileID: 3175580317371809241}
   - component: {fileID: 3175580317371809242}
+  - component: {fileID: 6428591422483091641}
   m_Layer: 7
   m_Name: RadPlant
   m_TagString: Plant
@@ -107,6 +108,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6428591422483091641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332321026732285623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92aa0c0b1bf46ac4daeb0c64f257fadd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  plantType: 4
+  ennemyType: 0000000002000000
+  targets: []
 --- !u!1 &332321027307848048
 GameObject:
   m_ObjectHideFlags: 0
@@ -21392,7 +21411,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 731
+  m_VersionIndex: 728
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22209,7 +22228,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1114
+  m_VersionIndex: 1111
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22308,7 +22327,7 @@ GameObject:
   - component: {fileID: 332321027908175324}
   - component: {fileID: 332321027908175325}
   - component: {fileID: 332321027908175322}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24482,7 +24501,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1302
+  m_VersionIndex: 1299
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
