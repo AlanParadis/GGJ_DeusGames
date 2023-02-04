@@ -17,10 +17,11 @@ MonoBehaviour:
   description: a Love Flower
   icon: {fileID: 21300000, guid: a2b4316c674e8304084390994de3c0a1, type: 3}
   data: 
-  inHandObject: {fileID: 7102374006042501026, guid: 10a2e853655f69346a652e3f97eb9cc8,
+  inHandObject: {fileID: 7102374006042501026, guid: e0d54ffe6a8571a4bb2554f428b76b05,
     type: 3}
-  onFloorObject: {fileID: 0}
+  onFloorObject: {fileID: 2358034131440865995, guid: f4ac7a83af1a17841b191baf2f336ae2,
+    type: 3}
   maxStackAmount: 1
-  currentStackAmount: 0
+  currentStackAmount: 1
   maxDurability: 0
   currentDurability: 0
