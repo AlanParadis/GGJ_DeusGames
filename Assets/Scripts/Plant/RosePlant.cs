@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TreeEditor;
 using UnityEngine;
 
-public class IcePlant : MonoBehaviour, IInteractable
+public class RosePlant : MonoBehaviour, IInteractable
 {
     Animator anim;
     bool isSauvage;
     [SerializeField] Item item;
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject iceBall;
-    [SerializeField] float nbIceBallGenerate;
+    [SerializeField] Transform player;
     [SerializeField] float distMin;
+    [SerializeField] float dammage;
     [SerializeField] float cd;
     float actualcd;
+    public bool hit;
+    Vector3 posInit;
+    Quaternion rotInit;
 
     public void DoInteraction()
     {
@@ -32,30 +36,23 @@ public class IcePlant : MonoBehaviour, IInteractable
     }
     private void Awake()
     {
-        actualcd = 0f;
         item.currentStackAmount = 1;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        posInit = new Vector3();
+        rotInit = new Quaternion();
+        posInit = transform.position;
+        rotInit = transform.rotation;
         isSauvage = true;
-        //anim = GetComponent<Animator>();
-        //anim.SetFloat("Dist", int.MaxValue);
+        anim = GetComponent<Animator>();
+        anim.SetFloat("Dist", int.MaxValue);
     }
-
-    public void Invocation(GameObject _target)
+    public void RoseHit()
     {
-        actualcd -= Time.deltaTime;
-        if (actualcd <= 0)
-        {
-            for (int i = 0; i < nbIceBallGenerate; i++)
-            {
-                GameObject go = Instantiate(iceBall, transform.position + Random.onUnitSphere + Vector3.up, transform.rotation);
-                go.GetComponent<IceProjectiles>().player = _target;
-            }
-            actualcd = cd;
-        }
+        player.GetComponent<PlayerHealth>().health -= dammage;
     }
 
     // Update is called once per frame
@@ -64,9 +61,14 @@ public class IcePlant : MonoBehaviour, IInteractable
         if (actualcd >= 0)
             actualcd -= Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, player.transform.position) <= distMin)
+        float dist = Vector3.Distance(transform.position, player.position);
+        anim.SetFloat("Dist", dist);
+        if (dist < distMin)
+            transform.LookAt(player.position);
+        else
         {
-            Invocation(player);
+            transform.position = posInit;
+            transform.rotation = rotInit;
         }
     }
 }

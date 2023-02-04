@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab529f07d543184428dba1eb26f337fe, type: 3}
   m_Name: RosePlant
   m_EditorClassIdentifier: 
-  id: LoveFlower
-  displayName: Love Flower
-  description: a Love Flower
+  id: RoseFlower
+  displayName: Rose Flower
+  description: a Rose Flower
   icon: {fileID: 21300000, guid: a2b4316c674e8304084390994de3c0a1, type: 3}
   data: 
   inHandObject: {fileID: 7102374006042501026, guid: e0d54ffe6a8571a4bb2554f428b76b05,
     type: 3}
-  onFloorObject: {fileID: 2358034131440865995, guid: f4ac7a83af1a17841b191baf2f336ae2,
+  onFloorObject: {fileID: 5738376197547321527, guid: bc8f7260328964d40aa0dfacc0acf66e,
     type: 3}
   maxStackAmount: 1
   currentStackAmount: 1
