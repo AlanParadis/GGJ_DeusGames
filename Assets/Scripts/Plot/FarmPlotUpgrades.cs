@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FarmPlotUpgrade", menuName = "Scriptables/FarmPlotUpgrades", order = 1), System.Serializable]
 public class FarmPlotUpgrades : Buyable
 {
+    [Header("Soil")]
     // nutriment modifiers
     public float nutrimentProductionModifier;
     public float nutrimentProductionSpeedModifier;

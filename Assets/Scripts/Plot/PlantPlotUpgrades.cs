@@ -6,11 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlantPlotUpgrade", menuName = "Scriptables/PlantPlotUpgrades", order = 1), System.Serializable]
 public class PlantPlotUpgrades : Buyable
 {
+    [Header("Plants")]
     // plats modifiers
     public float waterConsumptionModifier;
-    public float nutrimentConsumptionModifier;
+    public float soilConsumptionModifier;
+    public float photocoinProdModifier;
     public float growthSpeedModifier;
-    public float plantProductionModifier;
-    public float energyProductionModifier;
 
 }

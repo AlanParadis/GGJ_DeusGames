@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 142098188ac466b4fb84557f6691f268, type: 3}
-  m_Name: WaterCosumptionUpgrade
+  m_Name: SoilConsumption
   m_EditorClassIdentifier: 
-  waterConsumptionModifier: -1
-  nutrimentConsumptionModifier: 0
+  waterConsumptionModifier: 0
+  nutrimentConsumptionModifier: -1
   growthSpeedModifier: 0
   growthModifier: 0
   energyProductionModifier: 0

@@ -14,18 +14,34 @@ public enum PlotState
 
 public class Plot : MonoBehaviour
 {
-    [SerializeField] public PlotInteract plotInteract;
-
-    [SerializeField] public List<PlantPlotUpgrades> plotUpgrades;
-    [SerializeField] public List<FarmPlotUpgrades> farmPlotUpgrades;
-
     public PlotState plotState;
+    [SerializeField] public PlotInteract plotInteract;
+    public Item plantItem;
 
-    [SerializeField]public GameObject NutrimentPrefab;
-    [SerializeField]public GameObject PlantPrefab;
-
-    public Item item;
-
+    [SerializeField] public List<PlantPlotUpgrades> plantPlotUpgrades;
+    [SerializeField] public List<FarmPlotUpgrades> farmPlotUpgrades;
+    
+    public GameObject NutrimentPrefab;
+    public GameObject PlantPrefab;
+    
+    [Header("Plant")]
+    [SerializeField] Transform spawnPoint;
+    private bool CanAttackPlayer => waterAmount <= 0.0f;
+    //stats
+    [SerializeField] float plantPhotocoinProdMultiplier = 1.0f; //multiplier, 1 at start
+    float photocoinCurrentCooldown;
+    private float waterAmount; //0->100
+    private float maxWaterAmount = 100.0f;
+    [SerializeField] private float waterConsumptionRate; //per seconds
+    [SerializeField] private float soilAmount; //0->100
+    
+    //grow
+    [SerializeField] public float plantGrowRate;
+    [SerializeField] public float plantGrowTime;
+    float currentPlantGrowTimer;
+    [SerializeField] public int MaxPlantCount;
+    public List<GameObject> plants;
+    
     [Header("Farm")]
     [SerializeField] public float farmGrowRate;
     [SerializeField] public float farmGrowTime;
@@ -36,15 +52,7 @@ public class Plot : MonoBehaviour
     public int limitNutriment;
     public List<GameObject> nutriments;
 
-    [Header("Plant")]
-    [SerializeField] Transform spawnPoint;
-    [SerializeField] public float plantGrowRate;
-    [SerializeField] float plantProductionRate;
-    [SerializeField] public float plantGrowTime;
-    float plantGrowTimer;
-    [SerializeField] public int limitPlant;
-    float cdCoin;
-    public List<GameObject> plants;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -56,13 +64,15 @@ public class Plot : MonoBehaviour
     }
     public void AddPlant(Item _item)
     {
-        foreach (PlantPlotUpgrades upgrade in plotUpgrades)
+        //add upgrades
+        foreach (PlantPlotUpgrades upgrade in plantPlotUpgrades)
         {
-            plantGrowRate = upgrade.growthSpeedModifier;
-            plantProductionRate = upgrade.plantProductionModifier;
+            plantGrowRate += upgrade.growthSpeedModifier;
+            plantPhotocoinProdMultiplier += upgrade.photocoinProdModifier;
         }
-        item = _item;
-        PlantPrefab = item.plantGO;
+        //set plant
+        plantItem = _item;
+        PlantPrefab = plantItem.plantGO;
     }
     public void AddFarm(Item _item)
     {
@@ -71,7 +81,7 @@ public class Plot : MonoBehaviour
             farmGrowRate += upgrade.nutrimentProductionSpeedModifier;
             farmProductionRate += upgrade.nutrimentProductionModifier;
         }
-        item = _item;
+        plantItem = _item;
     }
 
     Vector3 SpawnPositionInBound()
@@ -82,16 +92,14 @@ public class Plot : MonoBehaviour
             spawnPoint.position.z + Random.insideUnitCircle.y * 0.5f);
     }
 
-    void PlantUpdate()
+    void PlantGrowUpdate()
     {
-        if (cdCoin > 0)
-            cdCoin -= Time.deltaTime;
-        plantGrowTimer += Time.deltaTime;
-        if (plantGrowTimer >= plantGrowRate)
+        currentPlantGrowTimer += Time.deltaTime;
+        if (currentPlantGrowTimer >= plantGrowRate)
         {
-            plantGrowTimer = 0;
+            currentPlantGrowTimer = 0;
             // spawn plant
-            if (PlantPrefab != null && plants.Count < limitPlant)
+            if (PlantPrefab != null && plants.Count < MaxPlantCount)
             {
                 // spawn plant
                 if (PlantPrefab != null)
@@ -106,20 +114,64 @@ public class Plot : MonoBehaviour
                 }
             }
         }
-        if (cdCoin <= 0 && plants.Count > 0) 
+    }
+
+    void PlantProductionUpdate()
+    {
+        if (photocoinCurrentCooldown > 0)
+            photocoinCurrentCooldown -= Time.deltaTime;
+        
+        if (photocoinCurrentCooldown <= 0 && plants.Count > 0) 
         {
             GenerateMoula();
-            cdCoin = plants[0].GetComponent<Plant>().cdCoin;
+            photocoinCurrentCooldown = plants[0].GetComponent<Plant>().cdCoin;
+        }
+    }
+    
+    void GenerateMoula()
+    {
+        float currentTime = DayNightCycle.Instance.GetCurrentTimeInRatio();
+        float currentLuminosity = 0.0f;
+        if (currentTime > 0.5f)
+        {
+            currentLuminosity = 0.0f;
+        }
+        else
+        {
+            //0 -> 1 (first half of day)
+            if(currentTime < 0.25f)
+                currentLuminosity = Mathf.Lerp(0.0f, 1.0f, currentTime / 0.25f);
+            //1 -> 0 (second half of day)
+            else
+                currentLuminosity = Mathf.Lerp(1.0f, 0.0f, (currentTime - 0.25f) / 0.25f);
+        }
+        
+        
+        for (int i = 0; i < plants.Count; i++)
+        {
+            GameManager.instance.photocoin += (int)(plants[i].GetComponent<Plant>().photocoin * plantPhotocoinProdMultiplier * currentLuminosity);
         }
     }
 
-    void GenerateMoula()
+    void PlantUpdateWater()
     {
-        for (int i = 0; i < plants.Count; i++)
+        if (waterAmount <= 0.0f)
+            return;
+        
+        waterAmount -= waterConsumptionRate * Time.deltaTime;
+        if (waterAmount <= 0.0f)
         {
-            GameManager.instance.photocoin += plants[i].GetComponent<Plant>().photocoin;
+            waterAmount = 0.0f;
         }
     }
+    
+    void PlantUpdate()
+    {
+        PlantGrowUpdate();
+        PlantProductionUpdate();
+        PlantUpdateWater();
+    }
+
 
     void FarmUpdate()
     {

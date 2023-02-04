@@ -83,7 +83,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
             Destroy(item);
         }
         plot.plants.Clear();
-        plot.item = null;
+        plot.plantItem = null;
         plot.PlantPrefab = null;
         //todo clear dirt list
         CloseWindow();
