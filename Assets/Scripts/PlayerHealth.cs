@@ -110,6 +110,8 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
+        ManagersManager.instance.inputManager.Inputs.PlayerGround.Disable();
+        
         deathCanvas.gameObject.SetActive(true);
 
         float currentTimer = respawnTime;
@@ -132,5 +134,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
 
         isDead = false;
+        
+        ManagersManager.instance.inputManager.Inputs.PlayerGround.Enable();
     }
 }
