@@ -60,7 +60,7 @@ public class Plot : MonoBehaviour
         foreach (PlantPlotUpgrades upgrade in plotUpgrades)
         {
             plantGrowRate = upgrade.growthSpeedModifier;
-            plantProductionRate = upgrade.plantProductionModifier;
+            //plantProductionRate = upgrade.plantProductionModifier;
         }
         item = _item;
         PlantPrefab = item.plantGO;
