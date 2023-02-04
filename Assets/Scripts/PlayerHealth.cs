@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +9,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Canvas deathCanvas;
     [SerializeField] private TMP_Text respawnTimerText;
     [SerializeField] private float respawnTime = 3.0f;
+    [SerializeField] private float maxTimeBeforeRegainHealth = 5.0f;
+    private float currentTimeBeforeRegainHealth = 0.0f;
+    private bool canRegainHealth = true;
+    //per seconds
+    [SerializeField] private float regainHealthAmount = 5.0f;
     private Vector3 spawnPointPos;
     
     private float health;
@@ -32,6 +36,25 @@ public class PlayerHealth : MonoBehaviour
         deathCanvas.gameObject.SetActive(false);
     }
 
+    void UpdateTimeBeforeRegainHealth()
+    {
+        if (!isDead && !canRegainHealth && health < maxHealth)
+        {
+            currentTimeBeforeRegainHealth -= Time.deltaTime;
+            if (currentTimeBeforeRegainHealth <= 0.0f)
+            {
+                currentTimeBeforeRegainHealth = 0.0f;
+                canRegainHealth = true;
+            }
+        }
+    }
+    
+    void Update()
+    {
+        UpdateTimeBeforeRegainHealth();
+        PassivelyRegainHealth();
+    }
+    
     void UpdateUI()
     {
         lifeBar.fillAmount = health/maxHealth;
@@ -49,6 +72,24 @@ public class PlayerHealth : MonoBehaviour
         if (health <= 0.0f)
         {
             Death();
+        }
+
+        canRegainHealth = false;
+        currentTimeBeforeRegainHealth = maxTimeBeforeRegainHealth;
+    }
+
+    void PassivelyRegainHealth()
+    {
+        if (!isDead && canRegainHealth)
+        {
+            health += regainHealthAmount * Time.deltaTime;
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+                canRegainHealth = false;
+            }
+
+            UpdateUI();
         }
     }
     
@@ -89,5 +130,7 @@ public class PlayerHealth : MonoBehaviour
 
         health = maxHealth;
         UpdateUI();
+
+        isDead = false;
     }
 }
