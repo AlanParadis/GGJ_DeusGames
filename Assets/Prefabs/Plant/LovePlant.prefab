@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 2173682161942952302}
   - component: {fileID: 160496663}
   - component: {fileID: 160496662}
-  - component: {fileID: 8340309131458463732}
   m_Layer: 0
   m_Name: LovePlant
   m_TagString: Plant
@@ -888,11 +887,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98657567707279147a7f0f4e5626acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 9e9c33612ec7c8446bd487b9a9e11397, type: 2}
   lifeBarTransform: {fileID: 8910649282631816010}
   pv: 5
   maxPv: 5
-  item: {fileID: 11400000, guid: 9e9c33612ec7c8446bd487b9a9e11397, type: 2}
-  player: {fileID: 0}
+  isWild: 1
+  maxCooldown: 3
+  damage: 5
+  distMin: 3
+  cdCoin: 5
+  photocoin: 3
 --- !u!54 &160496663
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -941,21 +945,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1350842, y: 0.8854778, z: 0.13180494}
   m_Center: {x: 0.00035669655, y: 0.4429115, z: 0.0026614666}
---- !u!114 &8340309131458463732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2358034131440865995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdCoin: 2
-  isSauvage: 0
-  photocoin: 10
 --- !u!1 &2358034132531985800
 GameObject:
   m_ObjectHideFlags: 0

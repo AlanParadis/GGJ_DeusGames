@@ -100,7 +100,7 @@ public class Plot : MonoBehaviour
                     // cube for now
                     Vector3 tempPos = SpawnPositionInBound();
                     GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
-                    plant.GetComponent<PlantScript>().isSauvage = false;
+                    plant.GetComponent<Plant>().isWild = false;
                     // scale down
                     plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
                     plants.Add(plant);
@@ -110,7 +110,7 @@ public class Plot : MonoBehaviour
         if (cdCoin <= 0 && plants.Count > 0) 
         {
             GenerateMoula();
-            cdCoin = plants[0].GetComponent<PlantScript>().cdCoin;
+            cdCoin = plants[0].GetComponent<Plant>().cdCoin;
         }
     }
 
@@ -118,7 +118,7 @@ public class Plot : MonoBehaviour
     {
         for (int i = 0; i < plants.Count; i++)
         {
-            GameManager.instance.photocoin += plants[i].GetComponent<PlantScript>().photocoin;
+            GameManager.instance.photocoin += plants[i].GetComponent<Plant>().photocoin;
         }
     }
 

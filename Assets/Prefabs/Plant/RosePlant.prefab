@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7435310976069733337}
   - component: {fileID: 7435310976069733338}
   - component: {fileID: 8847093340404356714}
-  - component: {fileID: 1443093941382743606}
   m_Layer: 0
   m_Name: RosePlant
   m_TagString: Plant
@@ -51,14 +50,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6213bdb5355154791f9303c18bc8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 40877180c21c87c439de1b2f2311772a, type: 2}
   lifeBarTransform: {fileID: 2303165914393831191}
   pv: 5
   maxPv: 5
-  item: {fileID: 11400000, guid: 40877180c21c87c439de1b2f2311772a, type: 2}
-  player: {fileID: 0}
-  distMin: 2.5
-  dammage: 3
-  cd: 35
+  isWild: 1
+  maxCooldown: 3
+  damage: 5
+  distMin: 3
+  cdCoin: 5
+  photocoin: 3
   hit: 0
 --- !u!65 &7435310976069733337
 BoxCollider:
@@ -128,21 +129,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1443093941382743606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5738376197547321527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdCoin: 2
-  isSauvage: 0
-  photocoin: 15
 --- !u!1 &5738376197768476528
 GameObject:
   m_ObjectHideFlags: 0

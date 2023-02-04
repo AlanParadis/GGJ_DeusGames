@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 332321026732285641}
   - component: {fileID: 3175580317371809241}
   - component: {fileID: 3175580317371809242}
-  - component: {fileID: 4142126065805575835}
   m_Layer: 0
   m_Name: RadPlant
   m_TagString: Plant
@@ -50,14 +49,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0275fba4afebaf49b71846bb46a93dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 81ee7ac6f423e514fb401fbc3d84e2f0, type: 2}
   lifeBarTransform: {fileID: 1843433511447754598}
   pv: 5
   maxPv: 5
-  item: {fileID: 11400000, guid: 81ee7ac6f423e514fb401fbc3d84e2f0, type: 2}
-  player: {fileID: 0}
-  distMin: 5
-  dammage: 0.25
-  cd: 0
+  isWild: 1
+  maxCooldown: 3
+  damage: 5
+  distMin: 3
+  cdCoin: 5
+  photocoin: 3
 --- !u!65 &3175580317371809241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,21 +107,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &4142126065805575835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332321026732285623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdCoin: 2
-  isSauvage: 0
-  photocoin: 30
 --- !u!1 &332321027307848048
 GameObject:
   m_ObjectHideFlags: 0

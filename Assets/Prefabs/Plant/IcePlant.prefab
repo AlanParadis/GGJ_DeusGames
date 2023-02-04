@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 5346114760710090096}
   - component: {fileID: 80950127757406479}
   - component: {fileID: 80950127757406476}
-  - component: {fileID: -5656177339940940818}
   m_Layer: 0
   m_Name: IcePlant
   m_TagString: Plant
@@ -81,15 +80,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7385216ccda4a342ac6c407d260f8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: ff5ca160d9889b147ac7843a7ae48548, type: 2}
   lifeBarTransform: {fileID: 7268348255104188261}
   pv: 5
   maxPv: 5
-  item: {fileID: 11400000, guid: ff5ca160d9889b147ac7843a7ae48548, type: 2}
-  player: {fileID: 0}
+  isWild: 1
+  maxCooldown: 3
+  damage: 5
+  distMin: 7.5
+  cdCoin: 3
+  photocoin: 5
   iceBall: {fileID: 8662828324919656049, guid: 996eec9f9685db04ebc8161b4d405e5e, type: 3}
   nbIceBallGenerate: 3
-  distMin: 7.5
-  cd: 5
 --- !u!65 &80950127757406479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,21 +140,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &-5656177339940940818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2995701865614594657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdCoin: 2
-  isSauvage: 0
-  photocoin: 20
 --- !u!1 &2995701866089172390
 GameObject:
   m_ObjectHideFlags: 0

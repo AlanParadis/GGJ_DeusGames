@@ -3102,7 +3102,6 @@ GameObject:
   - component: {fileID: 2922072340286617810}
   - component: {fileID: 61430722}
   - component: {fileID: 61430721}
-  - component: {fileID: 4009872092570381505}
   m_Layer: 0
   m_Name: FirePlant
   m_TagString: Plant
@@ -3140,14 +3139,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0275fba4afebaf49b71846bb46a93dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 4daffa62b33a9534a8b06fdc0d9bc3af, type: 2}
   lifeBarTransform: {fileID: 5328545125895599411}
   pv: 5
   maxPv: 5
-  item: {fileID: 11400000, guid: 4daffa62b33a9534a8b06fdc0d9bc3af, type: 2}
-  player: {fileID: 0}
+  isWild: 1
+  maxCooldown: 3
+  damage: 5
   distMin: 2.5
-  dammage: 5
-  cd: 0.5
+  cdCoin: 3
+  photocoin: 5
 --- !u!65 &61430722
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3196,21 +3197,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &4009872092570381505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922072340286617772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cdCoin: 2
-  isSauvage: 0
-  photocoin: 20
 --- !u!1 &2922072341029693291
 GameObject:
   m_ObjectHideFlags: 0
