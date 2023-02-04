@@ -41,6 +41,7 @@ public class Plot : MonoBehaviour
 
     [SerializeField] public int limitPlant;
     int actualPlant;
+    public List<GameObject> plants;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +85,7 @@ public class Plot : MonoBehaviour
                 plant.GetComponent<PlantScript>().isSauvage = false;
                 // scale down
                 plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
+                plants.Add(plant);
             }
 
         }

@@ -24,8 +24,10 @@ public class PlotInteract : MonoBehaviour, IInteractable
         
     }
 
-    public void CloseSlotWindow()
+    public void CloseWindow()
     {
+        addPlantWindow.enabled = false;
+        addDirtWindow.enabled = false;
         typePlotWindow.enabled = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
@@ -44,7 +46,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
             default:
                 break;
         }
-        CloseSlotWindow();
+        CloseWindow();
     }
 
 
@@ -54,18 +56,35 @@ public class PlotInteract : MonoBehaviour, IInteractable
             return;
         plot.AddPlant(_item);
         //todo enlever la fleur de l'inventaire
-        addPlantWindow.enabled = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        CloseWindow();
     }
-
 
     public void SetFarmMode(Item _item)
     {
-        addDirtWindow.enabled = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+        //todo add dirt to farm here
+        CloseWindow();
     }
+
+    public void ClearBtn()
+    {
+        foreach (var item in plot.plants)
+        {
+            Destroy(item);
+        }
+        plot.plants.Clear();
+        plot.item = null;
+        plot.PlantPrefab = null;
+        //todo clear dirt list
+        CloseWindow();
+    }
+
+    public void DeleteBtn()
+    {
+        ClearBtn();
+        plot.plotState = PlotState.Empty;
+        CloseWindow();
+    }
+
     public void DoInteraction()
     {
         switch (plot.plotState)
