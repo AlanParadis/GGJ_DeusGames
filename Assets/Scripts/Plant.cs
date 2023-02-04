@@ -105,24 +105,15 @@ public class Plant : MonoBehaviour, IInteractable
     {
         if (Vector3.SqrMagnitude(transform.position - LifeCanvas.instance.playerController.transform.position) <= 25)
         {
-            if (m_playerController)
-                return;
-
-            PlayerController playerController = LifeCanvas.instance.playerController;
-
-            if (playerController)
-            {
-                m_playerController = playerController;
+            if(!m_lifebar)
                 ShowLifebar();
-            }
-
-            return;
         }
-
-        if (m_playerController && m_lifebar)
+        else
         {
-            m_lifebar.SetLockState(false);
-            m_playerController = null;
+            if (m_lifebar)
+            {
+                m_lifebar.SetLockState(false);
+            }
         }
     }
 

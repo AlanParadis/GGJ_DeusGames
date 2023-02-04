@@ -92,4 +92,23 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Plant.cs</url>
+          <line>97</line>
+          <properties documentPath="F:\Dev\GGJ_DeusGames\GGJ_DeusGames\Assets\Scripts\Plant.cs" initialLine="97" containingFunctionPresentation="method 'ShowLifebar'">
+            <startOffsets>
+              <option value="2381" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2424" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
