@@ -31,9 +31,9 @@ public class UpgradeInterface : MonoBehaviour
         {
             upgradeButton.onClick.AddListener(() =>
             {
-                if (true)
+                if (GameManager.instance.photocoin >= _buyable.Price)
                 {
-                    // TODO : remove money
+                    GameManager.instance.photocoin -= _buyable.Price;
                     _buyable.Purchased = true;
                 }
             });
@@ -43,8 +43,9 @@ public class UpgradeInterface : MonoBehaviour
 
     public void SetupButtons(List<Buyable> _buyables)
     {
-        foreach (var buyable in _buyables)
+        for(int i=0; i < _buyables.Count; i++)
         {
+            Buyable buyable = _buyables[i];
             GameObject buttonGO = Instantiate(UpgradeButton, upgradeButtonsRoot);
             buttonGO.GetComponentInChildren<Image>().sprite = buyable.icon;
             buttonGO.GetComponentInChildren<TextMeshProUGUI>().text = buyable.displayName;
@@ -53,6 +54,8 @@ public class UpgradeInterface : MonoBehaviour
             {
                 UpdateInfoInterface(buyable);
             });
+            if (i == 0)
+                button.onClick.Invoke();
         }
     }
     

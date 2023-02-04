@@ -40,10 +40,10 @@ public class Plot : MonoBehaviour
     [Header("Plant")]
     [SerializeField] Transform spawnPoint;
     [SerializeField] public float plantGrowRate;
+    [SerializeField] float plantProductionRate;
     [SerializeField] public float plantGrowTime;
     float plantGrowTimer;
     [SerializeField] public int limitPlant;
-    int actualPlant;
     float cdCoin;
     public List<GameObject> plants;
 
@@ -92,7 +92,7 @@ public class Plot : MonoBehaviour
         {
             plantGrowTimer = 0;
             // spawn plant
-            if (PlantPrefab != null && actualPlant < limitPlant)
+            if (PlantPrefab != null && plants.Count < limitPlant)
             {
                 // spawn plant
                 if (PlantPrefab != null)
