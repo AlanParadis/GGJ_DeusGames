@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool TryToRun => ManagersManager.instance.inputManager.Inputs.PlayerGround.Run.ReadValue<float>() > .3f;
+    public bool TryToRun => ManagersManager.instance.inputManager.Inputs.PlayerGround.Run.ReadValue<float>() > .3f
+                            && canRunDueToStaminaExhaustion;
     public bool TryToCrouch => ManagersManager.instance.inputManager.Inputs.PlayerGround.Crouch.ReadValue<float>() > .3f;
     public bool TryToJump => ManagersManager.instance.inputManager.Inputs.PlayerGround.Jump.ReadValue<float>() > .3f;
     public bool TryToMove => ManagersManager.instance.inputManager.Inputs.PlayerGround.Move.ReadValue<Vector2>().magnitude > .3f;
@@ -46,6 +49,18 @@ public class PlayerController : MonoBehaviour
     [Space(10), Header("Interactions")] 
     [SerializeField] LayerMask interactionLayers;
 
+    [Space(10), Header("Stamina")] 
+    [SerializeField] private float currentStamina;
+    [SerializeField] private float maxStamina;
+    //per seconds
+    [SerializeField] private float runStaminaLoseAmount;
+    //per jump
+    [SerializeField] private float jumpStaminaLoseAmount;
+    //per seconds
+    [SerializeField] private float regainStaminaAmount;
+    [SerializeField] private UnityEngine.UI.Image StaminaBar;
+    private bool canRunDueToStaminaExhaustion = true;
+    
     private float m_yRot;
     private Vector3 m_moveDir;
     private float m_crouchTransition;
@@ -57,10 +72,14 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         inventoryController = InventoryController.Instance;
+
+        currentStamina = maxStamina;
     }
 
     private void Update()
     {
+        UpdateStamina();
+        
         HandleInventory();
 
         HandleLook();
@@ -73,8 +92,80 @@ public class PlayerController : MonoBehaviour
         HandleRun();
 
         ApplyMovement();
+        
+        UpdateStaminaUI();
     }
 
+    
+    #region Stamina_ExternalFunctions
+    //return == was able to lose stamina
+    bool TryLoseStamina(float ActionCostAmount)
+    {
+        if (HasEnoughStaminaForAction(ActionCostAmount))
+        {
+            LoseStamina(ActionCostAmount);
+            return true;
+        }
+
+        return false;
+    }
+    #endregion
+    
+    #region Stamina_InternalFunctions
+    bool HasEnoughStaminaForAction(float ActionCostAmount)
+    {
+        if (currentStamina - ActionCostAmount < 0.0f)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    void UpdateStaminaUI()
+    {
+        StaminaBar.fillAmount = currentStamina / maxStamina;
+    }
+    
+    void LoseStamina(float amount)
+    {
+        currentStamina -= amount;
+        if (currentStamina < 0.0f)
+        {
+            currentStamina = 0.0f;
+        }
+    }
+
+    void GainStamina(float amount)
+    {
+        currentStamina += amount;
+        if (currentStamina > maxStamina)
+        {
+            currentStamina = maxStamina;
+        }
+    }
+    
+    void UpdateStamina()
+    {
+        //to rerun, we need to release the run button before rerunning
+        if (!canRunDueToStaminaExhaustion && ManagersManager.instance.inputManager.Inputs.PlayerGround.Run.WasReleasedThisFrame()) 
+            canRunDueToStaminaExhaustion = true;
+        
+        if (TryToRun)
+        {
+            bool succeed = TryLoseStamina(runStaminaLoseAmount * Time.deltaTime);
+            //reached exhaustion, stop running
+            if (!succeed)
+                canRunDueToStaminaExhaustion = false;
+        }
+        //only regainStamina when we aren't running
+        else
+        {
+            GainStamina(regainStaminaAmount * Time.deltaTime);
+        }
+    }
+    #endregion
+    
     private void ApplyMovement()
     {
         if (inventoryController.isOpen)
@@ -117,7 +208,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!TryToJump || !controller.isGrounded || !CanMove)
             return;
-
+        
+        if (!TryLoseStamina(jumpStaminaLoseAmount))
+            return;
+        
         m_moveDir.y = jumpForce;
     }
 
