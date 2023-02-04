@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using TreeEditor;
 using UnityEngine;
 
 public class RosePlant : Plant
