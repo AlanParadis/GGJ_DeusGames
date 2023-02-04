@@ -31,6 +31,12 @@ public class DayNightCycle : MonoBehaviour
     private float NightDurationInSeconds;
     private float DayNightDurationInSeconds;
 
+    public List<Material> mats;
+    public List<Color> colors;
+    public Gradient colorGradient;
+    public Gradient colorLightGradient;
+    public AnimationCurve lightIntensity;
+
     //0->1, 0->0.5 = day, 0.5->1.0 = night
     public float GetCurrentTimeInRatio()
     {
@@ -103,5 +109,23 @@ public class DayNightCycle : MonoBehaviour
     {
         IncrementTimeOfTheDay();
         UpdateDirectionalLight();
+
+        RenderSettings.ambientSkyColor = colorGradient.Evaluate(GetCurrentTimeInRatio());
+        RenderSettings.ambientLight = colorLightGradient.Evaluate(GetCurrentTimeInRatio());
+
+        DirectionalLight.intensity = lightIntensity.Evaluate(GetCurrentTimeInRatio());
+
+        if (GetCurrentTimeInRatio() > .1f && GetCurrentTimeInRatio() < .4f)
+        {
+            RenderSettings.skybox = mats[1];
+        }
+        else if (GetCurrentTimeInRatio() > .5f && GetCurrentTimeInRatio() < 1f)
+        {
+            RenderSettings.skybox = mats[2];
+        }
+        else
+        {
+            RenderSettings.skybox = mats[0];
+        }
     }
 }
