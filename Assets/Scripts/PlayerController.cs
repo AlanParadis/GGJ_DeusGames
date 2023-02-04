@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public bool TryToMove => ManagersManager.instance.inputManager.Inputs.PlayerGround.Move.ReadValue<Vector2>().magnitude > .3f;
     public bool CanMove => !inventoryController.isOpen;
     public Vector3 LookDir => playerCam.transform.forward;
+    public Camera Cam => playerCam;
     public float CurrentSpeed => TryToRun ? runSpeed : TryToCrouch ? crouchSpeed : walkSpeed;
 
     [Header("References")] 

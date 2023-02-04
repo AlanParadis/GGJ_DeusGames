@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirePlant : MonoBehaviour, IInteractable
+public class FirePlant : Plant, IInteractable
 {
     Animator anim;
     [SerializeField] Item item;

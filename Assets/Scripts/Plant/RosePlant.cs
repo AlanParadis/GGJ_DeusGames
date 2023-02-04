@@ -4,7 +4,7 @@ using System.Drawing;
 using TreeEditor;
 using UnityEngine;
 
-public class RosePlant : MonoBehaviour, IInteractable
+public class RosePlant : Plant, IInteractable
 {
     Animator anim;
     [SerializeField] Item item;
