@@ -133,4 +133,9 @@ public class PanelHotbar : PanelInventory
                 m_selectionSlot[i].color = Color.clear;
         }
     }
+
+    public Item? GetSelectedItem()
+    {
+        return m_slots[m_selectedSlotId].GetItem();
+    }
 }
