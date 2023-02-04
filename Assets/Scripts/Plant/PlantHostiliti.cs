@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlantHostiliti : MonoBehaviour
 {
-    enum Plant
+    enum PlantType
     {
         Love,
         Rose,
@@ -12,14 +12,17 @@ public class PlantHostiliti : MonoBehaviour
         Ice,
         Radioactive
     }
+    [SerializeField] LayerMask layerMask;
     [SerializeField] GameObject parent;
-    [SerializeField] Plant plantType;
-    [SerializeField] List<Plant> ennemyType;
+    [SerializeField] PlantType plantType;
+    [SerializeField] List<PlantType> ennemyType;
     public List<GameObject> targets = new List<GameObject>();
+    float dist;
     // Start is called before the first frame update
     void Start()
     {
-
+        dist = parent.GetComponent<Plant>().GetDist();
+        InvokeRepeating("CheckEnnemyOverlap", 0, .5f);
     }
 
     // Update is called once per frame
@@ -27,6 +30,11 @@ public class PlantHostiliti : MonoBehaviour
     {
         
 
+    }
+
+    void CheckEnnemyOverlap()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, dist, layerMask);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -48,6 +48,11 @@ public class Plant : MonoBehaviour, IInteractable
     }
 
 
+    public float GetDist()
+    {
+        return distMin;
+    }
+
     protected virtual void DoPlantAction()
     {
         currentCooldown = maxCooldown;
