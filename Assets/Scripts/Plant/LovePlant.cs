@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class LovePlant : MonoBehaviour, IInteractable
+public class LovePlant : Plant, IInteractable
 {
     Animator anim;
     bool isSauvage;
