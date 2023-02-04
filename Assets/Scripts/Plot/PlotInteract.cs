@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -9,13 +11,21 @@ public class PlotInteract : MonoBehaviour, IInteractable
     [SerializeField] Canvas typePlotWindow;
     [SerializeField] Canvas addPlantWindow;
     [SerializeField] Canvas addDirtWindow;
+    [SerializeField] Canvas upgradeWindow;
+    
+    public List<PlantPlotUpgrades> PlantUpgrades;
+    public List<PlantPlotUpgrades> FarmUpgrades;
+    
     // Start is called before the first frame update
     void Start()
     {
-        typePlotWindow.enabled = false;
-        addPlantWindow.enabled = false;
-        addDirtWindow.enabled = false;
+        typePlotWindow.gameObject.SetActive(false);
+        addPlantWindow.gameObject.SetActive(false);
+        addDirtWindow.gameObject.SetActive(false);
+        upgradeWindow.gameObject.SetActive(false);
 
+        PlantUpgrades = ((PlantPlotUpgrades[])Resources.LoadAll("PlantUpgrade", typeof(PlantPlotUpgrades))).ToList();
+        FarmUpgrades = ((PlantPlotUpgrades[])Resources.LoadAll("FarmUpgrade", typeof(FarmPlotUpgrades))).ToList();
     }
 
     // Update is called once per frame
@@ -26,26 +36,18 @@ public class PlotInteract : MonoBehaviour, IInteractable
 
     public void CloseWindow()
     {
-        addPlantWindow.enabled = false;
-        addDirtWindow.enabled = false;
-        typePlotWindow.enabled = false;
+        addPlantWindow.gameObject.SetActive(false);
+        addDirtWindow.gameObject.SetActive(false);
+        typePlotWindow.gameObject.SetActive(false);
+        upgradeWindow.gameObject.SetActive(false);
+        InventoryController.Instance.isOpen = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void SetParcelle(int _state)
     {
-        switch (_state)
-        {
-            case 0:
-                plot.plotState = PlotState.Plant;
-                break;
-            case 1:
-                plot.plotState = PlotState.Farm;
-                break;
-            default:
-                break;
-        }
+        plot.plotState = (PlotState)_state;
         CloseWindow();
     }
 
@@ -55,7 +57,8 @@ public class PlotInteract : MonoBehaviour, IInteractable
         if (InventoryController.Instance.inventory.GetTotalOfThisItem(_item) <= 0)
             return;
         plot.AddPlant(_item);
-        //todo enlever la fleur de l'inventaire
+        //enleve la fleur de l'inventaire
+        InventoryController.Instance.inventory.RemoveItem(_item.id, 1);
         CloseWindow();
     }
 
@@ -87,24 +90,41 @@ public class PlotInteract : MonoBehaviour, IInteractable
 
     public void DoInteraction()
     {
+        InventoryController.Instance.isOpen = true;
         switch (plot.plotState)
         {
             case PlotState.Empty:
                 //Open Window for chose Type of plot (plant or Farm)
-                typePlotWindow.enabled = true;
+                typePlotWindow.gameObject.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 break;
             case PlotState.Plant:
                 //Open Window for chose type of plant to harvest
-                addPlantWindow.enabled = true;
+                if (plot.PlantPrefab != null)
+                {
+                    upgradeWindow.gameObject.SetActive(true);
+                    upgradeWindow.GetComponent<UpgradeInterface>().SetupButtons(PlantUpgrades.ConvertTo<List<Buyable>>());
+                }
+                else
+                {
+                    addPlantWindow.gameObject.SetActive(true);
+                }
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
 
                 break;
             case PlotState.Farm:
                 //Open Window for chose type of dirt to harvest
-                addDirtWindow.enabled = true;
+                if (plot.PlantPrefab != null)
+                {
+                    upgradeWindow.gameObject.SetActive(true);
+                    upgradeWindow.GetComponent<UpgradeInterface>().SetupButtons(FarmUpgrades.ConvertTo<List<Buyable>>());
+                }
+                else
+                {
+                    addDirtWindow.gameObject.SetActive(true);
+                }
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
 
