@@ -6,7 +6,6 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
-
 public enum PlotState
 {
     Empty,
@@ -30,30 +29,38 @@ public class Plot : MonoBehaviour
 
     [Header("Farm")]
     [SerializeField] public float farmGrowRate;
+    [SerializeField] public float farmGrowTime;
     float farmGrowTimer;
     // production rate of 0.1 represent a  10% chance of producing another nutriment
-    [SerializeField] public float farmProductionRate;
+    [SerializeField, Tooltip("production rate of 0.1 represent a  10% chance of producing another nutriment")]
+    public float farmProductionRate;
+    public int limitNutriment;
+    public List<GameObject> nutriments;
 
     [Header("Plant")]
     [SerializeField] Transform spawnPoint;
     [SerializeField] public float plantGrowRate;
+    [SerializeField] public float plantGrowTime;
     float plantGrowTimer;
-
     [SerializeField] public int limitPlant;
     int actualPlant;
+    float cdCoin;
     public List<GameObject> plants;
 
     // Start is called before the first frame update
     void Start()
     {
         plotState = PlotState.Empty;
-        actualPlant = 0;
+        // initialize to empty list
+        plants = new List<GameObject>();
+        nutriments = new List<GameObject>();
     }
     public void AddPlant(Item _item)
     {
         foreach (PlantPlotUpgrades upgrade in plotUpgrades)
         {
-            plantGrowRate = 1;
+            plantGrowRate = upgrade.growthSpeedModifier;
+            plantProductionRate = upgrade.plantProductionModifier;
         }
         item = _item;
         PlantPrefab = item.plantGO;
@@ -68,53 +75,80 @@ public class Plot : MonoBehaviour
         item = _item;
     }
 
+    Vector3 SpawnPositionInBound()
+    {
+        return new Vector3(
+            spawnPoint.position.x + Random.insideUnitCircle.x * 0.5f,
+            spawnPoint.position.y,
+            spawnPoint.position.z + Random.insideUnitCircle.y * 0.5f);
+    }
+
     void PlantUpdate()
     {
+        if (cdCoin > 0)
+            cdCoin -= Time.deltaTime;
         plantGrowTimer += Time.deltaTime;
         if (plantGrowTimer >= plantGrowRate)
         {
             plantGrowTimer = 0;
-
             // spawn plant
             if (PlantPrefab != null && actualPlant < limitPlant)
             {
-                actualPlant++;
-                // cube for now
-                Vector3 tempPos = new Vector3(spawnPoint.position.x + Random.insideUnitCircle.x * 0.5f, spawnPoint.position.y, spawnPoint.position.z + Random.insideUnitCircle.y * 0.5f);
-                GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
-                plant.GetComponent<PlantScript>().isSauvage = false;
-                // scale down
-                plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
-                plants.Add(plant);
+                // spawn plant
+                if (PlantPrefab != null)
+                {
+                    // cube for now
+                    Vector3 tempPos = SpawnPositionInBound();
+                    GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
+                    plant.GetComponent<PlantScript>().isSauvage = false;
+                    // scale down
+                    plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
+                    plants.Add(plant);
+                }
             }
+        }
+        if (cdCoin <= 0 && plants.Count > 0) 
+        {
+            GenerateMoula();
+            cdCoin = plants[0].GetComponent<PlantScript>().cdCoin;
+        }
+    }
 
+    void GenerateMoula()
+    {
+        for (int i = 0; i < plants.Count; i++)
+        {
+            GameManager.instance.photocoin += plants[i].GetComponent<PlantScript>().photocoin;
         }
     }
 
     void FarmUpdate()
     {
-        farmGrowTimer += Time.deltaTime;
-        if (farmGrowTimer >= farmGrowRate)
+        farmGrowTimer += Time.deltaTime * farmGrowRate;
+        if (farmGrowTimer >= farmGrowTime)
         {
             farmGrowTimer = 0;
-
             int nutrimenCount = Mathf.Max((int)(farmProductionRate * 10), 1);
 
-            for (int i = 0; i < nutrimenCount; i++)
+            for (int i = 0; i < nutrimenCount && nutriments.Count < limitNutriment; i++)
             {
-                Collider[] colliders = Array.Empty<Collider>();
-                while (colliders.Length > 0)
-                {
-                    // spawn nutriment
-                    // place nutriment random within plot bounds
-                    Vector3 randomPos = new Vector3(Random.Range(-transform.localScale.x / 2.0f, transform.localScale.x / 2.0f), 0, Random.Range(-transform.localScale.z / 2.0f, transform.localScale.z / 2.0f));
-                    Vector3 spawnPos = randomPos + transform.localScale.y / 1.95f * Vector3.up;
+                // spawn nutriment
+                // place nutriment random within plot bounds
+                Vector3 spawnPosition = SpawnPositionInBound();
 
-                    // check if position collides with anything
-                    colliders = Physics.OverlapSphere(spawnPos, 0.25f);
+                if (NutrimentPrefab == null)
+                {
+                    // cube for now
+                    GameObject nutriment = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    nutriment.transform.position = spawnPosition;
+                    // scale down
+                    nutriment.transform.localScale = new Vector3(0.35f, 0.25f, 0.35f);
+                    
+                    nutriments.Add(nutriment);
+                    
+                    Destroy(nutriment, 10);
                 }
             }
-
             // spawn nutriment
             if (NutrimentPrefab == null)
             {

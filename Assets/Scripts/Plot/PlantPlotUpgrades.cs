@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "PlantPlotUpgrade", menuName = "Plots/PlantPlotUpgrade", order = 1)]
-public class PlantPlotUpgrades : MonoBehaviour
+[CreateAssetMenu(fileName = "PlantPlotUpgrade", menuName = "Scriptables/PlantPlotUpgrades", order = 1), System.Serializable]
+public class PlantPlotUpgrades : Buyable
 {
     // plats modifiers
     public float waterConsumptionModifier;
     public float nutrimentConsumptionModifier;
+    public float growthSpeedModifier;
+    public float plantProductionModifier;
     public float energyProductionModifier;
 
-    
 }

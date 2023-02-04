@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PlantScript : MonoBehaviour
+public class Photocoin : MonoBehaviour
 {
-    public float cdCoin;
-    public bool isSauvage = true;
-    public int photocoin;
+    [SerializeField]TextMeshProUGUI cointxt;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +15,6 @@ public class PlantScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        cointxt.text = GameManager.instance.photocoin.ToString();
     }
 }

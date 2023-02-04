@@ -132,4 +132,26 @@ public class PanelInventory : InventoryPanel
 
         return value;
     }
+
+    public void RemoveItem(string _id, int _amount)
+    {
+        if (_amount <= 0)
+            return;
+
+        List<Slot> slots = m_slots.Where(slot => slot.GetItem() != null && slot.GetItem().id == _id).ToList();
+        slots.Sort((a, b) => a.GetItem().currentStackAmount.CompareTo(b.GetItem().currentStackAmount));
+
+        foreach (Slot slot in slots)
+        {
+            int ToRemove = Mathf.Min(_amount, slot.GetItem().currentStackAmount);
+
+            slot.GetItem().currentStackAmount -= ToRemove;
+            _amount -= ToRemove;
+
+            slot.Refresh();
+
+            if (_amount <= 0)
+                break;
+        }
+    }
 }

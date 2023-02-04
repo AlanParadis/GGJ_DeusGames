@@ -6,14 +6,12 @@ using static UnityEditor.Progress;
 public class LovePlant : Plant, IInteractable
 {
     Animator anim;
-    bool isSauvage;
     [SerializeField] Item item;
     [SerializeField] Transform player;
 
     public void DoInteraction()
     {
-        isSauvage = GetComponent<PlantScript>().isSauvage;
-        if (!isSauvage)
+        if (!GetComponent<PlantScript>().isSauvage)
             return;
         Item it = InventoryController.Instance.inventory.AddItem(item);
        
@@ -25,8 +23,7 @@ public class LovePlant : Plant, IInteractable
 
     public void SetInteractionText()
     {
-        isSauvage = GetComponent<PlantScript>().isSauvage;
-        if (!isSauvage)
+        if (!GetComponent<PlantScript>().isSauvage)
             return;
         ActionUI.Instance.SetVisible();
 
@@ -48,8 +45,7 @@ public class LovePlant : Plant, IInteractable
     // Update is called once per frame
     void Update()
     {
-        isSauvage = GetComponent<PlantScript>().isSauvage;
-        if (!isSauvage)
+        if (!GetComponent<PlantScript>().isSauvage)
             return;
         anim.SetFloat("Dist", Vector3.Distance(transform.position, player.position));
     }
