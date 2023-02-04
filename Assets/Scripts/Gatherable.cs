@@ -24,7 +24,7 @@ public class Gatherable : MonoBehaviour
 
     [Header("Gathering")]
     [SerializeField] int life;
-    [SerializeField] List<GatherableItem> itemPool = new List<GatherableItem>();
+    [SerializeField] public List<GatherableItem> itemPool = new List<GatherableItem>();
 
     [Header("FX")]
     public GameObject breakFX;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickable : MonoBehaviour, IInteractable
 {
     [Header("Infos")] 
-    [SerializeField] Item item;
+    [SerializeField] public Item item;
     [SerializeField] int itemAmount;
 
     private void Awake()

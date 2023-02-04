@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PanelHotbar : PanelInventory
 {
     public Item EquippedItem { get { return m_slots[m_selectedSlotId].GetItem(); } }
+    public Slot EquippedSlot { get { return m_slots[m_selectedSlotId]; } }
 
     [Header("References")]
     [SerializeField] Image selectionSquare;
@@ -123,7 +124,22 @@ public class PanelHotbar : PanelInventory
             player.SetObjectInHand(EquippedItem);
     }
 
-    private void Refresh()
+    public void RemoveOneItem()
+    {
+        EquippedSlot.GetItem().currentStackAmount--;
+
+        if (EquippedItem.currentStackAmount == 0)
+        {
+            m_slots[m_selectedSlotId].SetItem(null);
+
+            UpdateSelection();
+        }
+
+        EquippedSlot.Refresh();
+        Refresh();
+    }
+
+    public void Refresh()
     {
         for (int i = 0; i < m_selectionSlot.Count; i++)
         {
