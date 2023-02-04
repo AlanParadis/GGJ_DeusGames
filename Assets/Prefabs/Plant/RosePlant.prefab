@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5738376198695282871}
   - {fileID: 2303165914393831191}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8847093340404356715
 MonoBehaviour:
@@ -57,7 +57,7 @@ MonoBehaviour:
   isWild: 1
   maxCooldown: 3
   damage: 5
-  distMin: 3
+  distMin: 2.5
   cdCoin: 5
   photocoin: 3
   hit: 0
@@ -21414,7 +21414,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 704
+  m_VersionIndex: 743
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -23688,7 +23688,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1181
+  m_VersionIndex: 1220
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -24553,7 +24553,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1090
+  m_VersionIndex: 1129
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
