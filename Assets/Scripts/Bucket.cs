@@ -31,7 +31,7 @@ public class Bucket : Holdable
         GameObject go = Instantiate(waterBallPrefab);
         go.transform.position = transform.position;
 
-        //go.GetComponent<WaterBall>().Throw(owner.LookDir * 10f);
+        go.GetComponent<WaterBall>().Throw(owner.LookDir * 10f);
     }
 
     private void OnTriggerEnter(Collider other)
