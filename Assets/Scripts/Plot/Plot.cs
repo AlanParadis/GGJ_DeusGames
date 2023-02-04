@@ -6,7 +6,6 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
-
 public enum PlotState
 {
     Empty,
@@ -38,9 +37,9 @@ public class Plot : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] public float plantGrowRate;
     float plantGrowTimer;
-
     [SerializeField] public int limitPlant;
     int actualPlant;
+    float cdCoin;
     public List<GameObject> plants;
 
     // Start is called before the first frame update
@@ -70,11 +69,12 @@ public class Plot : MonoBehaviour
 
     void PlantUpdate()
     {
+        if (cdCoin > 0)
+            cdCoin -= Time.deltaTime;
         plantGrowTimer += Time.deltaTime;
         if (plantGrowTimer >= plantGrowRate)
         {
             plantGrowTimer = 0;
-
             // spawn plant
             if (PlantPrefab != null && actualPlant < limitPlant)
             {
@@ -87,7 +87,19 @@ public class Plot : MonoBehaviour
                 plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
                 plants.Add(plant);
             }
+        }
+        if (cdCoin <= 0 && plants.Count > 0) 
+        {
+            GenerateMoula();
+            cdCoin = plants[0].GetComponent<PlantScript>().cdCoin;
+        }
+    }
 
+    void GenerateMoula()
+    {
+        for (int i = 0; i < plants.Count; i++)
+        {
+            GameManager.instance.photocoin += plants[i].GetComponent<PlantScript>().photocoin;
         }
     }
 
@@ -97,7 +109,6 @@ public class Plot : MonoBehaviour
         if (farmGrowTimer >= farmGrowRate)
         {
             farmGrowTimer = 0;
-
             int nutrimenCount = Mathf.Max((int)(farmProductionRate * 10), 1);
 
             for (int i = 0; i < nutrimenCount; i++)
@@ -114,7 +125,6 @@ public class Plot : MonoBehaviour
                     colliders = Physics.OverlapSphere(spawnPos, 0.25f);
                 }
             }
-
             // spawn nutriment
             if (NutrimentPrefab == null)
             {

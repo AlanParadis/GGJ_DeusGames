@@ -118,7 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 746fd52a71e223b4886db6310ca37633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cdCoin: 2
   isSauvage: 0
+  photocoin: 30
 --- !u!1 &332321027307848048
 GameObject:
   m_ObjectHideFlags: 0
