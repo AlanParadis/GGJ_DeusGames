@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: soil_pink
   displayName: Soil Pink
-  description: 
+  description: It can be used to refill the soil amount of a plot of love plants
   icon: {fileID: 21300000, guid: ca042c3b964e03c458224947187022df, type: 3}
   data: 
   inHandObject: {fileID: 0}

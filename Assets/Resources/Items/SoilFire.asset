@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: soil_fire
   displayName: Soil Fire
-  description: 
+  description: It can be used to refill the soil amount of a plot of fire plants
   icon: {fileID: 21300000, guid: d1861029f5eba294b8b0dc4c207aa633, type: 3}
   data: 
   inHandObject: {fileID: 0}

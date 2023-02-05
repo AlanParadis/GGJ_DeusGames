@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: soil_ice
   displayName: Soil Ice
-  description: 
+  description: It can be used to refill the soil amount of a plot of ice plants
   icon: {fileID: 21300000, guid: 5565408c0d06f4d47a0e1b8283c4b1da, type: 3}
   data: 
   inHandObject: {fileID: 0}

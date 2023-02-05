@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IcePlant
   m_EditorClassIdentifier: 
   id: IceFlower
-  displayName: Ice Flower
-  description: a Ice Flower
+  displayName: Ice Plant
+  description: This plant can be put in a plot to make a plot of ice plants
   icon: {fileID: 21300000, guid: 2596a2ca92327c3429e92160afedc1a7, type: 3}
   data: 
   inHandObject: {fileID: 7102374006042501026, guid: e0d54ffe6a8571a4bb2554f428b76b05,

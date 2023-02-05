@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: rake
   displayName: Rake
-  description: 
+  description: It can be used to weaken plants and then gather them
   icon: {fileID: 21300000, guid: a9dfbc33e4937b1438bd985a6326a10c, type: 3}
   data: 
   inHandObject: {fileID: 5509061824365201574, guid: 78154ccba2912e04faee81e1d838b819,

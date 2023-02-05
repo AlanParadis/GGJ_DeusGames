@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: soil_rad
   displayName: Soil Radioactive
-  description: 
+  description: It can be used to refill the soil amount of a plot of radiaoctive
+    plants
   icon: {fileID: 21300000, guid: b4dc82a4e47351943a5195db995b66c0, type: 3}
   data: 
   inHandObject: {fileID: 0}
