@@ -17,6 +17,8 @@ public class WaterBall : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
             return;
 
+        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position);
+        
         Destroy(gameObject);
     }
 }
