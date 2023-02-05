@@ -157,6 +157,8 @@ public class PlotInteract : MonoBehaviour, IInteractable
             default:
                 break;
         }
+        
+        SoundManager.Instance.PlaySound(SoundManager.Instance.interfaceSound, transform.position, 1.0f, false, 1.0f);
     }
 
     // coroutine that update in real time the info panel if the panel is active

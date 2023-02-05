@@ -149,6 +149,8 @@ public class Plant : MonoBehaviour, IInteractable
             Destroy(gameObject);
         else
             item = it;
+        
+        SoundManager.Instance.PlaySound(SoundManager.Instance.itemObtain, transform.position, 0.3f, false, 1.0f);
     }
 
     public void SetInteractionText()
