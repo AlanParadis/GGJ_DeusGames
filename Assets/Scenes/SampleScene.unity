@@ -76772,6 +76772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5140362706517213489, guid: ec72194e1528033479f9630976e2102e,
         type: 3}
+      propertyPath: soilConsumptionRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140362706517213489, guid: ec72194e1528033479f9630976e2102e,
+        type: 3}
       propertyPath: waterConsumptionRate
       value: 10
       objectReference: {fileID: 0}

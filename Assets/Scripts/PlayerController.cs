@@ -207,6 +207,8 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, 3.5f, interactionLayers))
         {
             IInteractable interact = hit.transform.gameObject.GetComponent<IInteractable>();
+            if (interact == null)
+                interact = hit.transform.gameObject.GetComponentInChildren<IInteractable>();
 
             interact?.SetInteractionText();
 
