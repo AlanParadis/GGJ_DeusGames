@@ -233,6 +233,16 @@ public class Plot : MonoBehaviour
                 nutriments.Add(nutriment);
             }
         }
+
+        //check for null reference in nutriments and remove from list if null
+        for (int i = 0; i < nutriments.Count; i++)
+        {
+            if (nutriments[i] == null)
+            {
+                nutriments.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     // Update is called once per frame
