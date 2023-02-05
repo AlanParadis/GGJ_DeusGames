@@ -38,6 +38,8 @@ public class SoilBall : MonoBehaviour
             go.GetComponent<Gatherable>().itemPool.Add(it);
         }
 
+        SoundManager.Instance.PlaySound(SoundManager.Instance.soilSplash, transform.position);
+        
         Destroy(gameObject);
     }
 }

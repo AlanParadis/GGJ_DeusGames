@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] public AudioClip waterSplash;
+    [SerializeField] public AudioClip rakeHit;
+    [SerializeField] public AudioClip soilSplash;
     
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip _clip, Vector3 pos, bool is3D = true)
+    public void PlaySound(AudioClip _clip, Vector3 pos, float _volume = 1.0f, bool is3D = true)
     {
         if (_clip == null)
         {
@@ -54,6 +56,7 @@ public class SoundManager : MonoBehaviour
         }
 
         emptyAudioSource.clip = _clip;
+        emptyAudioSource.volume = _volume;
         //3d
         if(is3D)
             emptyAudioSource.spatialBlend = 1.0f;

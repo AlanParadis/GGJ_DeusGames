@@ -17,6 +17,8 @@ public class Rake : Holdable
     {
         Collider[] cols = Physics.OverlapSphere(muzzle.position, .6f);
 
+        bool hasHit = false;
+        
         foreach (Collider col in cols)
         {
             //Debug.Log(col.gameObject.name);
@@ -26,6 +28,13 @@ public class Rake : Holdable
 
             Plant plant = col.gameObject.GetComponent<Plant>();
             plant.TakeDamage(1);
+
+            hasHit = true;
+        }
+
+        if (hasHit)
+        {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.rakeHit, transform.position, 0.1f);
         }
     }
 }
