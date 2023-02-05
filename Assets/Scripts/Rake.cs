@@ -7,7 +7,7 @@ public class Rake : Holdable
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Transform muzzle;
-
+    
     private void Update()
     {
         animator.SetBool("Fire", ManagersManager.instance.inputManager.Inputs.PlayerGround.PrimaryAction.ReadValue<float>() > .3f);
@@ -19,7 +19,7 @@ public class Rake : Holdable
 
         foreach (Collider col in cols)
         {
-            Debug.Log(col.gameObject.name);
+            //Debug.Log(col.gameObject.name);
 
             if (!col.gameObject.CompareTag("Plant"))
                 continue;
