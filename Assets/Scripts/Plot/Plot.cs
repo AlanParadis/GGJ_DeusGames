@@ -89,6 +89,8 @@ public class Plot : MonoBehaviour
         //set plant
         plantItem = _item;
         PlantPrefab = plantItem.plantGO;
+
+        currentPlantGrowTimer = plantGrowTime;
     }
     
     public void AddFarm(Item _item)
@@ -100,6 +102,7 @@ public class Plot : MonoBehaviour
         }
         plantItem = _item;
         NutrimentPrefab = _item.plantGO;
+        farmGrowTimer = farmGrowTime;
     }
 
     Vector3 SpawnPositionInBound()
@@ -112,8 +115,9 @@ public class Plot : MonoBehaviour
 
     void PlantGrowUpdate()
     {
-        currentPlantGrowTimer += Time.deltaTime / (soilAmount/100);
-        if (currentPlantGrowTimer >= plantGrowRate && waterAmount > 0)
+        plantGrowRate = Time.deltaTime / (soilAmount / 100);
+        currentPlantGrowTimer += plantGrowRate;
+        if (currentPlantGrowTimer >= plantGrowTime && waterAmount > 0)
         {
             currentPlantGrowTimer = 0;
             // spawn plant
@@ -126,6 +130,8 @@ public class Plot : MonoBehaviour
                     Vector3 tempPos = SpawnPositionInBound();
                     GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
                     plant.GetComponent<Plant>().isWild = false;
+                    plant.GetComponent<PlantHostiliti>().enabled = false;
+                    plant.transform.Find("Sphere").gameObject.SetActive(false);
                     // scale down
                     //plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
                     plants.Add(plant);
@@ -201,6 +207,7 @@ public class Plot : MonoBehaviour
         PlantGrowUpdate();
         PlantProductionUpdate();
         PlantUpdateWater();
+        PlantUpdateSoil();
     }
 
 
@@ -254,6 +261,7 @@ public class Plot : MonoBehaviour
             waterAmount += 20;
             if (waterAmount > 100)
                 waterAmount = 100;
+            Destroy(collision.gameObject);
         }
         else if (collision.gameObject.GetComponent<SoilBall>() != null)
         {
@@ -276,7 +284,7 @@ public class Plot : MonoBehaviour
                     }
                 }
             }
+            Destroy(collision.gameObject);
         }
-        Destroy(collision.gameObject);
     }
 }
