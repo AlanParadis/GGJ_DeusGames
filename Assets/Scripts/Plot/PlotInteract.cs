@@ -11,7 +11,10 @@ public class PlotInteract : MonoBehaviour, IInteractable
     [SerializeField] Canvas addPlantWindow;
     [SerializeField] Canvas addDirtWindow;
     [SerializeField] Canvas upgradeWindow;
-    
+    [SerializeField] Canvas infoWindow;
+
+    InfoInterface infoInterface;
+
     public List<PlantPlotUpgrades> PlantUpgrades;
     public List<FarmPlotUpgrades> FarmUpgrades;
     
@@ -33,6 +36,8 @@ public class PlotInteract : MonoBehaviour, IInteractable
         {
             FarmUpgrades.Add(upgrade as FarmPlotUpgrades);
         }
+
+        infoInterface = infoWindow.GetComponent<InfoInterface>();
 
     }
 
@@ -73,6 +78,10 @@ public class PlotInteract : MonoBehaviour, IInteractable
     public void SetFarmMode(Item _item)
     {
         //todo add dirt to farm here
+        if (InventoryController.Instance.inventory.GetTotalOfThisItem(_item) <= 0)
+            return;
+        plot.AddPlant(_item);
+        InventoryController.Instance.inventory.RemoveItem(_item.id, 1);
         CloseWindow();
     }
 
@@ -83,7 +92,6 @@ public class PlotInteract : MonoBehaviour, IInteractable
             Destroy(item);
         }
         plot.plants.Clear();
-        plot.plantItem = null;
         plot.PlantPrefab = null;
         //todo clear dirt list
         CloseWindow();
@@ -111,8 +119,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
                 //Open Window for chose type of plant to harvest
                 if (plot.PlantPrefab != null)
                 {
-                    upgradeWindow.gameObject.SetActive(true);
-                    upgradeWindow.GetComponent<UpgradeInterface>().SetupButtons(PlantUpgrades.ConvertTo<List<Buyable>>());
+                    ShowInfoWindow();
                 }
                 else
                 {
@@ -124,10 +131,9 @@ public class PlotInteract : MonoBehaviour, IInteractable
                 break;
             case PlotState.Farm:
                 //Open Window for chose type of dirt to harvest
-                if (plot.PlantPrefab != null)
+                if (plot.NutrimentPrefab != null)
                 {
-                    upgradeWindow.gameObject.SetActive(true);
-                    upgradeWindow.GetComponent<UpgradeInterface>().SetupButtons(FarmUpgrades.ConvertTo<List<Buyable>>());
+                    ShowInfoWindow();
                 }
                 else
                 {
@@ -142,10 +148,66 @@ public class PlotInteract : MonoBehaviour, IInteractable
         }
     }
 
+    // coroutine that update in real time the info panel if the panel is active
+    public IEnumerator UpdateInfoCoroutine()
+    {
+        while (infoWindow.gameObject.activeSelf)
+        {
+            UpdateInfo();
+            yield return 0;
+        }
+    }
+
+    public void ShowInfoWindow()
+    {
+        infoWindow.gameObject.SetActive(true);
+        upgradeWindow.gameObject.SetActive(false);
+        StartCoroutine(UpdateInfoCoroutine());
+    }
+
+    public void ShowUpgradeWindow()
+    {
+        if (plot.plotState == PlotState.Plant)
+            infoWindow.GetComponent<UpgradeInterface>().SetupButtons(PlantUpgrades.ConvertTo<List<Buyable>>());
+        else
+            infoWindow.GetComponent<UpgradeInterface>().SetupButtons(FarmUpgrades.ConvertTo<List<Buyable>>());
+
+        infoWindow.gameObject.SetActive(false);
+        upgradeWindow.gameObject.SetActive(true);
+    }
+
     public void SetInteractionText()
     {
         ActionUI.Instance.SetVisible();
 
         ActionUI.Instance.SetText($"Press E to configure");
     }
+
+    private void UpdateInfo()
+    {
+        if (plot.plotState == PlotState.Farm)
+        {
+            infoInterface.famInfo.SetActive(true);
+            infoInterface.plantInfo.SetActive(false);
+            infoInterface.f_growRate.text = plot.farmGrowRate.ToString();
+            infoInterface.f_productionRate.text = plot.farmProductionRate.ToString();
+        }
+        else if (plot.plotState == PlotState.Plant)
+        {
+            infoInterface.famInfo.SetActive(false);
+            infoInterface.plantInfo.SetActive(true);
+            infoInterface.p_growRate.text = plot.plantGrowRate.ToString();
+            float ratio = DayNightCycle.Instance.GetCurrentTimeInRatio();
+            // if ration < 0.5 then it's day, and remap the ratio to 0-1, else it's night so it's 0
+            if (ratio < 0.5f)
+                ratio = Mathf.InverseLerp(0, 0.5f, ratio);
+            else
+                ratio = 0;
+            infoInterface.p_sunlightAmount.text = ((int)ratio * 10).ToString();
+            infoInterface.p_waterAmount.text = plot.waterAmount.ToString();
+            infoInterface.p_waterConsumptionRate.text = plot.waterConsumptionRate.ToString();
+            infoInterface.p_photocoinGeneration.text = plot.PhotocoinGeneration.ToString();
+        }
+    }
+
 }

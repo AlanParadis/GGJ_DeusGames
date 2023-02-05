@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142098188ac466b4fb84557f6691f268, type: 3}
   m_Name: SoilConsumption
   m_EditorClassIdentifier: 
-  waterConsumptionModifier: 0
-  nutrimentConsumptionModifier: -1
-  growthSpeedModifier: 0
-  growthModifier: 0
-  energyProductionModifier: 0
   Price: 99
   Purchased: 0
+  icon: {fileID: 0}
+  displayName: 
+  description: 
+  waterConsumptionModifier: 0
+  soilConsumptionModifier: -1
+  photocoinProdModifier: 0
+  growthSpeedModifier: 0

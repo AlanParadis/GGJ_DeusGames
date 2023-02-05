@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa7a6ff94ad8924eaab084ba905eec4, type: 3}
   m_Name: FarmSpeedUp
   m_EditorClassIdentifier: 
-  nutrimentProductionModifier: 0
-  nutrimentProductionSpeedModifier: 1
   Price: 99
   Purchased: 0
+  icon: {fileID: 0}
+  displayName: 
+  description: 
+  nutrimentProductionModifier: 0
+  nutrimentProductionSpeedModifier: 1

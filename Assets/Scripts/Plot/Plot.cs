@@ -30,10 +30,11 @@ public class Plot : MonoBehaviour
     //stats
     [SerializeField] float plantPhotocoinProdMultiplier = 1.0f; //multiplier, 1 at start
     float photocoinCurrentCooldown;
-    private float waterAmount; //0->100
-    private float maxWaterAmount = 100.0f;
-    [SerializeField] private float waterConsumptionRate; //per seconds
-    [SerializeField] private float soilAmount; //0->100
+    public float waterAmount; //0->100
+    public float maxWaterAmount = 100.0f;
+    [SerializeField] public float waterConsumptionRate; //per seconds
+    [SerializeField] public float soilAmount; //0->100
+    public int PhotocoinGeneration;
     
     //grow
     [SerializeField] public float plantGrowRate;
@@ -69,6 +70,7 @@ public class Plot : MonoBehaviour
         {
             plantGrowRate += upgrade.growthSpeedModifier;
             plantPhotocoinProdMultiplier += upgrade.photocoinProdModifier;
+
         }
         //set plant
         plantItem = _item;
@@ -82,6 +84,7 @@ public class Plot : MonoBehaviour
             farmProductionRate += upgrade.nutrimentProductionModifier;
         }
         plantItem = _item;
+        NutrimentPrefab = _item.plantGO;
     }
 
     Vector3 SpawnPositionInBound()
@@ -109,7 +112,7 @@ public class Plot : MonoBehaviour
                     GameObject plant = Instantiate(PlantPrefab, tempPos, transform.rotation, transform);
                     plant.GetComponent<Plant>().isWild = false;
                     // scale down
-                    plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
+                    //plant.transform.localScale = new Vector3(0.25f, 0.50f, 0.25f);
                     plants.Add(plant);
                 }
             }
@@ -145,7 +148,8 @@ public class Plot : MonoBehaviour
             else
                 currentLuminosity = Mathf.Lerp(1.0f, 0.0f, (currentTime - 0.25f) / 0.25f);
         }
-        
+
+        PhotocoinGeneration = (int)(plants[0].GetComponent<Plant>().photocoin * plants.Count * plantPhotocoinProdMultiplier * currentLuminosity);
         
         for (int i = 0; i < plants.Count; i++)
         {
@@ -185,28 +189,14 @@ public class Plot : MonoBehaviour
             {
                 // spawn nutriment
                 // place nutriment random within plot bounds
-                Vector3 spawnPosition = SpawnPositionInBound();
+                Vector3 tempPos = SpawnPositionInBound();
 
-                if (NutrimentPrefab == null)
-                {
-                    // cube for now
-                    GameObject nutriment = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    nutriment.transform.position = spawnPosition;
-                    // scale down
-                    nutriment.transform.localScale = new Vector3(0.35f, 0.25f, 0.35f);
-                    
-                    nutriments.Add(nutriment);
-                    
-                    Destroy(nutriment, 10);
-                }
-            }
-            // spawn nutriment
-            if (NutrimentPrefab == null)
-            {
                 // cube for now
-                //GameObject nutriment = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                GameObject nutriment = Instantiate(NutrimentPrefab, tempPos, transform.rotation, transform);
                 // scale down
                 //nutriment.transform.localScale = new Vector3(0.35f, 0.25f, 0.35f);
+                
+                nutriments.Add(nutriment);
             }
         }
     }

@@ -7096,7 +7096,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.85
+  m_fontSize: 24.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -12913,7 +12913,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh390760
+  m_Name: pb_Mesh118452
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -17562,7 +17562,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.85
+  m_fontSize: 24.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -76681,6 +76681,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140362706517213489, guid: ec72194e1528033479f9630976e2102e,
+        type: 3}
+      propertyPath: soilAmount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140362706517213489, guid: ec72194e1528033479f9630976e2102e,
+        type: 3}
+      propertyPath: MaxPlantCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140362706517213489, guid: ec72194e1528033479f9630976e2102e,
+        type: 3}
+      propertyPath: waterConsumptionRate
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6642148223911874320, guid: ec72194e1528033479f9630976e2102e,
         type: 3}

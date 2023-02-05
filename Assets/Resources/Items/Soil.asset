@@ -20,7 +20,7 @@ MonoBehaviour:
   inHandObject: {fileID: 6698001488605299474, guid: 827d4f832c3e7d444a8160d4230f9426,
     type: 3}
   onFloorObject: {fileID: 0}
-  plantGO: {fileID: 0}
+  plantGO: {fileID: 3311445020985338198, guid: 7edd3f568f027e14d90f499bc193efad, type: 3}
   maxStackAmount: 5
   currentStackAmount: 0
   maxDurability: 0
