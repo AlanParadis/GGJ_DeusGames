@@ -25,6 +25,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
         addPlantWindow.gameObject.SetActive(false);
         addDirtWindow.gameObject.SetActive(false);
         upgradeWindow.gameObject.SetActive(false);
+        infoWindow.gameObject.SetActive(false);
 
         var UpgradeObjects = Resources.LoadAll("PlantUpgrade", typeof(PlantPlotUpgrades));
         foreach (var upgrade in UpgradeObjects)
@@ -53,6 +54,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
         addDirtWindow.gameObject.SetActive(false);
         typePlotWindow.gameObject.SetActive(false);
         upgradeWindow.gameObject.SetActive(false);
+        infoWindow.gameObject.SetActive(false);
         InventoryController.Instance.isOpen = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
@@ -60,8 +62,12 @@ public class PlotInteract : MonoBehaviour, IInteractable
 
     public void SetParcelle(int _state)
     {
+        typePlotWindow.gameObject.SetActive(false);
         plot.plotState = (PlotState)_state;
-        CloseWindow();
+        if (plot.plotState == PlotState.Plant)
+            addPlantWindow.gameObject.SetActive(true);
+        else if (plot.plotState == PlotState.Farm)
+            addDirtWindow.gameObject.SetActive(true);
     }
 
 
