@@ -30,6 +30,8 @@ public class Tool : Holdable
                     go.transform.position = hit.point;
                     go.transform.LookAt(transform.position);
 
+                    SoundManager.Instance.PlaySound(SoundManager.Instance.rakeHit, transform.position, 0.1f);
+                    
                     Destroy(go, 3f);
                 }
             }
