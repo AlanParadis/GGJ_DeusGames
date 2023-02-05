@@ -123,7 +123,7 @@ public class Plant : MonoBehaviour, IInteractable
     {
         if (Vector3.SqrMagnitude(transform.position - LifeCanvas.instance.playerController.transform.position) <= 25)
         {
-            if(!m_lifebar)
+            if(!m_lifebar && isWild)
                 ShowLifebar();
         }
         else

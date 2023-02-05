@@ -15,7 +15,7 @@ MonoBehaviour:
   Price: 99
   Purchased: 0
   icon: {fileID: 0}
-  displayName: 
-  description: 
+  displayName: Farm Production Upgrade
+  description: Increase farm production
   nutrimentProductionModifier: 0.5
   nutrimentProductionSpeedModifier: 0
