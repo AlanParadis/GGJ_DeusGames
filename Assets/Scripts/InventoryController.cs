@@ -12,6 +12,7 @@ public class InventoryController : MonoBehaviour
     public PanelCursor cursor;
     public PanelHotbar hotbar;
     public PanelStorage storage;
+    public PanelInfo info;
 
     [SerializeField] private Canvas canvas;
 

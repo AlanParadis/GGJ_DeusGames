@@ -9,6 +9,7 @@ public class PanelInventory : InventoryPanel
     [SerializeField] public Transform grid;
     
     protected List<Slot> m_slots = new List<Slot>();
+    
     private void LoadSlots()
     {
         if (!grid || grid.childCount <= 0)

@@ -81,11 +81,14 @@ public class Slot : MonoBehaviour
     public void OnPointerEnter()
     {
         backgroundImage.color = hoverredColor;
+        if(GetItem() != null)
+            InventoryController.Instance.info.SetItemInfo(GetItem());
     }
 
     public void OnPointerExit()
     {
         backgroundImage.color = normalColor;
+        InventoryController.Instance.info.ClearInfo();
     }
 
     public void OnPointerClick()
