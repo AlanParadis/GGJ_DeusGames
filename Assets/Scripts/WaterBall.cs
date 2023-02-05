@@ -27,7 +27,7 @@ public class WaterBall : MonoBehaviour
             }
         }
 
-        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position, 1.0f, true, 1.2f);
         
         Destroy(gameObject);
     }

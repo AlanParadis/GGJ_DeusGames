@@ -38,6 +38,9 @@ public class Bucket : Holdable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (filled)
+            return;
+        
         if (other.gameObject.CompareTag("Water"))
         {
             filled = true;
