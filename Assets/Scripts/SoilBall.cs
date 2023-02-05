@@ -20,6 +20,16 @@ public class SoilBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
             return;
+        // if layer is Plot
+        if (other.gameObject.layer == UnityEngine.LayerMask.NameToLayer("Plot"))
+        {
+            Plot plot = other.gameObject.GetComponent<Plot>();
+            if (plot != null)
+            {
+                plot.OnSoilBallEnter(this);
+                return;
+            }
+        }
 
         GetComponent<Collider>().enabled = false;
 

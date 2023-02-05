@@ -253,38 +253,42 @@ public class Plot : MonoBehaviour
         }
     }
 
-    // collision detection, non triger
-    private void OnCollisionEnter(Collision collision)
+    public void OnWaterBallEnter(WaterBall waterBall)
     {
-        if (collision.gameObject.GetComponent<WaterBall>() != null)
+        // if plant mode
+        if (plotState != PlotState.Plant)
         {
-            waterAmount += 20;
-            if (waterAmount > 100)
-                waterAmount = 100;
-            Destroy(collision.gameObject);
+            return;
         }
-        else if (collision.gameObject.GetComponent<SoilBall>() != null)
+        waterAmount += 20;
+        if (waterAmount > 100)
+            waterAmount = 100;
+        Destroy(waterBall.gameObject);
+    }
+
+    public void OnSoilBallEnter(SoilBall soilBall)
+    {
+        // if plant mode
+        if (plotState != PlotState.Plant)
         {
-            // if plant mode
-            if (plotState != PlotState.Plant)
+            return;
+        }
+        // base on plant item id, check is soilbag item id correspond in the key pair list
+        foreach (var plantsoilpair in plantSoilPairs)
+        {
+            if (plantItem.id == plantsoilpair.Item1)
             {
-                return;
-            }
-            // base on plant item id, check is soilbag item id correspond in the key pair list
-            foreach (var plantsoilpair in plantSoilPairs)
-            {
-                if (plantItem.id == plantsoilpair.Item1)
+                // if soilbag item id correspond
+                if (soilBall.item.id == plantsoilpair.Item2)
                 {
-                    // if soilbag item id correspond
-                    if (collision.gameObject.GetComponent<SoilBall>().item.id == plantsoilpair.Item2)
-                    {
-                        soilAmount += 20;
-                        if (soilAmount > 100)
-                            soilAmount = 100;
-                    }
+                    soilAmount += 20;
+                    if (soilAmount > 100)
+                        soilAmount = 100;
+                    Destroy(soilBall.gameObject);
+                    break;
                 }
             }
-            Destroy(collision.gameObject);
         }
     }
+
 }

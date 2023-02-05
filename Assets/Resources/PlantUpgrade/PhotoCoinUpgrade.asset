@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142098188ac466b4fb84557f6691f268, type: 3}
   m_Name: PhotoCoinUpgrade
   m_EditorClassIdentifier: 
-  Price: 99
+  Price: 30
   Purchased: 0
   icon: {fileID: 0}
   displayName: Photocoin Upgrade
   description: Increase photocoin production
   waterConsumptionModifier: 0
   soilConsumptionModifier: 0
-  photocoinProdModifier: 1
+  photocoinProdModifier: 10
   growthSpeedModifier: 0

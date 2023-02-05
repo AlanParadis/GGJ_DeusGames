@@ -17,7 +17,17 @@ public class WaterBall : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
             return;
 
-        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position, 1.0f, true, 1.2f);
+        // if layer is Plot
+        if (other.gameObject.layer == UnityEngine.LayerMask.NameToLayer("Plot"))
+        {
+            Plot plot = other.gameObject.GetComponent<Plot>();
+            if (plot != null)
+            {
+                plot.OnWaterBallEnter(this);
+            }
+        }
+
+        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position);
         
         Destroy(gameObject);
     }

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142098188ac466b4fb84557f6691f268, type: 3}
   m_Name: SoilConsumption
   m_EditorClassIdentifier: 
-  Price: 99
+  Price: 20
   Purchased: 0
   icon: {fileID: 21300000, guid: 108604fee81e9214ba107b3274a100ae, type: 3}
   displayName: Soil Cosumtion upgrade
   description: Reduce soil cosumptioon
   waterConsumptionModifier: 0
-  soilConsumptionModifier: -1
+  soilConsumptionModifier: -0.25
   photocoinProdModifier: 0
   growthSpeedModifier: 0

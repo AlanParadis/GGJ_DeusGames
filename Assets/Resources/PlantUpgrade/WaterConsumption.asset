@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142098188ac466b4fb84557f6691f268, type: 3}
   m_Name: WaterConsumption
   m_EditorClassIdentifier: 
-  Price: 99
+  Price: 20
   Purchased: 0
   icon: {fileID: 21300000, guid: 69f1b9b08cc51834cbec87efde6bc2c2, type: 3}
   displayName: Water Consumption Upgrade
   description: Reduce Water Consumption
-  waterConsumptionModifier: -1
+  waterConsumptionModifier: -0.25
   soilConsumptionModifier: 0
   photocoinProdModifier: 0
   growthSpeedModifier: 0
