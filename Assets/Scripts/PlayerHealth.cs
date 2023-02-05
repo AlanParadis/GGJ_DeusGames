@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
     
-    void Death()
+    public void Death()
     {
         if (isDead)
             return;

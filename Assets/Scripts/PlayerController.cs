@@ -4,6 +4,8 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float OutOfMapHeight = -100.0f;
+    
     public bool TryToRun => ManagersManager.instance.inputManager.Inputs.PlayerGround.Run.ReadValue<float>() > .3f
                             && canRunDueToStaminaExhaustion;
     public bool TryToCrouch => ManagersManager.instance.inputManager.Inputs.PlayerGround.Crouch.ReadValue<float>() > .3f;
@@ -76,6 +78,15 @@ public class PlayerController : MonoBehaviour
         currentStamina = maxStamina;
     }
 
+    void UpdateIsOutOfMapHeight()
+    {
+        //prevent softlock from falling out of the map
+        if (transform.position.y < OutOfMapHeight)
+        {
+            GetComponent<PlayerHealth>().Death();
+        }
+    }
+    
     private void Update()
     {
         UpdateStamina();
@@ -94,6 +105,8 @@ public class PlayerController : MonoBehaviour
         ApplyMovement();
         
         UpdateStaminaUI();
+
+        UpdateIsOutOfMapHeight();
     }
 
     
