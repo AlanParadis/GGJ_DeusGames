@@ -17,7 +17,8 @@ MonoBehaviour:
   description: It can be used to refill the soil amount of a plot of ice plants
   icon: {fileID: 21300000, guid: 5565408c0d06f4d47a0e1b8283c4b1da, type: 3}
   data: 
-  inHandObject: {fileID: 0}
+  inHandObject: {fileID: 6698001488605299474, guid: ce7fa5145ae63794e936cfe05e03f479,
+    type: 3}
   onFloorObject: {fileID: 0}
   plantGO: {fileID: 3311445020985338198, guid: 7edd3f568f027e14d90f499bc193efad, type: 3}
   maxStackAmount: 5

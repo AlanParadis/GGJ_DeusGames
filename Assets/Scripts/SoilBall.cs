@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoilBall : MonoBehaviour
 {
     public GameObject soilPrefab;
-    private Item item;
+    public Item item;
 
     public void Throw(Vector3 _dir, Item _it)
     {

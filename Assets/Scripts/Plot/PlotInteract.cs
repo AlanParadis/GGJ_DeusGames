@@ -86,7 +86,7 @@ public class PlotInteract : MonoBehaviour, IInteractable
         //todo add dirt to farm here
         if (InventoryController.Instance.inventory.GetTotalOfThisItem(_item) <= 0)
             return;
-        plot.AddPlant(_item);
+        plot.AddFarm(_item);
         InventoryController.Instance.inventory.RemoveItem(_item.id, 1);
         CloseWindow();
     }
@@ -213,6 +213,8 @@ public class PlotInteract : MonoBehaviour, IInteractable
             infoInterface.p_waterAmount.text = plot.waterAmount.ToString();
             infoInterface.p_waterConsumptionRate.text = plot.waterConsumptionRate.ToString();
             infoInterface.p_photocoinGeneration.text = plot.PhotocoinGeneration.ToString();
+            infoInterface.p_soilAmount.text = plot.soilAmount.ToString();
+            infoInterface.p_soilConsumptionRate.text = plot.soilConsumptionRate.ToString();
         }
     }
 

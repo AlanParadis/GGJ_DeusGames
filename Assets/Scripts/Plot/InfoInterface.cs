@@ -17,6 +17,8 @@ public class InfoInterface : MonoBehaviour
     [SerializeField] public TextMeshProUGUI p_growRate;
     [SerializeField] public TextMeshProUGUI p_waterAmount;
     [SerializeField] public TextMeshProUGUI p_waterConsumptionRate;
+    [SerializeField] public TextMeshProUGUI p_soilAmount;
+    [SerializeField] public TextMeshProUGUI p_soilConsumptionRate;
     [SerializeField] public TextMeshProUGUI p_sunlightAmount;
     [SerializeField] public TextMeshProUGUI p_photocoinGeneration;
 

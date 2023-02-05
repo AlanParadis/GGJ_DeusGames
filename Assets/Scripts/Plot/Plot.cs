@@ -12,8 +12,19 @@ public enum PlotState
     Farm
 }
 
+
+
 public class Plot : MonoBehaviour
 {
+    // std pairs of plant and soils
+    public List<Tuple<string, string>> plantSoilPairs = new List<Tuple<string, string>>()
+    {
+        new Tuple<string, string>("FireFlower", "soil_fire"),
+        new Tuple<string, string>("IceFlower", "soil_ice"),
+        new Tuple<string, string>("LoveFlower", "soil_pink"),
+        new Tuple<string, string>("RoseFlower", "soil"),
+        new Tuple<string, string>("RadPlant", "soil_rad")
+    };
     public PlotState plotState;
     [SerializeField] public PlotInteract plotInteract;
     public Item plantItem;
@@ -33,7 +44,9 @@ public class Plot : MonoBehaviour
     public float waterAmount; //0->100
     public float maxWaterAmount = 100.0f;
     [SerializeField] public float waterConsumptionRate; //per seconds
+    [SerializeField] public float soilConsumptionRate; // per seconds
     [SerializeField] public float soilAmount; //0->100
+    [SerializeField] public string soilID;
     public int PhotocoinGeneration;
     
     //grow
@@ -53,7 +66,6 @@ public class Plot : MonoBehaviour
     public int limitNutriment;
     public List<GameObject> nutriments;
 
-    
 
     // Start is called before the first frame update
     void Start()
@@ -70,12 +82,15 @@ public class Plot : MonoBehaviour
         {
             plantGrowRate += upgrade.growthSpeedModifier;
             plantPhotocoinProdMultiplier += upgrade.photocoinProdModifier;
+            waterConsumptionRate += upgrade.waterConsumptionModifier;
+            soilConsumptionRate += upgrade.soilConsumptionModifier;
 
         }
         //set plant
         plantItem = _item;
         PlantPrefab = plantItem.plantGO;
     }
+    
     public void AddFarm(Item _item)
     {
         foreach (FarmPlotUpgrades upgrade in farmPlotUpgrades)
@@ -97,8 +112,8 @@ public class Plot : MonoBehaviour
 
     void PlantGrowUpdate()
     {
-        currentPlantGrowTimer += Time.deltaTime;
-        if (currentPlantGrowTimer >= plantGrowRate)
+        currentPlantGrowTimer += Time.deltaTime / (soilAmount/100);
+        if (currentPlantGrowTimer >= plantGrowRate && waterAmount > 0)
         {
             currentPlantGrowTimer = 0;
             // spawn plant
@@ -168,6 +183,18 @@ public class Plot : MonoBehaviour
             waterAmount = 0.0f;
         }
     }
+
+    void PlantUpdateSoil()
+    {
+        if (soilAmount <= 0.0f)
+            return;
+        
+        soilAmount -= soilConsumptionRate * Time.deltaTime;
+        if (soilAmount <= 0.0f)
+        {
+            soilAmount = 0.0f;
+        }
+    }
     
     void PlantUpdate()
     {
@@ -217,5 +244,39 @@ public class Plot : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    // collision detection, non triger
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<WaterBall>() != null)
+        {
+            waterAmount += 20;
+            if (waterAmount > 100)
+                waterAmount = 100;
+        }
+        else if (collision.gameObject.GetComponent<SoilBall>() != null)
+        {
+            // if plant mode
+            if (plotState != PlotState.Plant)
+            {
+                return;
+            }
+            // base on plant item id, check is soilbag item id correspond in the key pair list
+            foreach (var plantsoilpair in plantSoilPairs)
+            {
+                if (plantItem.id == plantsoilpair.Item1)
+                {
+                    // if soilbag item id correspond
+                    if (collision.gameObject.GetComponent<SoilBall>().item.id == plantsoilpair.Item2)
+                    {
+                        soilAmount += 20;
+                        if (soilAmount > 100)
+                            soilAmount = 100;
+                    }
+                }
+            }
+        }
+        Destroy(collision.gameObject);
     }
 }
