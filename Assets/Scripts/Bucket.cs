@@ -14,7 +14,7 @@ public class Bucket : Holdable
 
     private void Update()
     {
-        if (ManagersManager.instance.inputManager.Inputs.PlayerGround.PrimaryAction.triggered)
+        if (ManagersManager.instance.inputManager.Inputs.PlayerGround.PrimaryAction.triggered && filled)
             Use();
     }
 
