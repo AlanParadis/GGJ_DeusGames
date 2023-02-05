@@ -16,7 +16,7 @@ public class FirePlant : Plant
         base.DoPlantAction();
         if (plantHost.nearest != null)
         {
-            float distMobs = Vector3.Distance(transform.position, m_playerController.transform.position);
+            float distMobs = Vector3.Distance(transform.position, plantHost.nearest.transform.position);
             float distPlayer = Vector3.Distance(transform.position, m_playerController.transform.position);
             if (distMobs > distPlayer)
             {
