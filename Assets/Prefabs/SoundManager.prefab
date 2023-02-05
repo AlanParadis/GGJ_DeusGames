@@ -47,3 +47,5 @@ MonoBehaviour:
   waterSplash: {fileID: 8300000, guid: 89c47ab71d8930b4bb4fcd52c446ddf8, type: 3}
   rakeHit: {fileID: 8300000, guid: 8f291892704fabb4d87c04a52be408f8, type: 3}
   soilSplash: {fileID: 8300000, guid: ec6a4da805f67c94595ad3769a70767b, type: 3}
+  itemObtain: {fileID: 8300000, guid: 935e9df5322b7af49b0e17e0e1f44414, type: 3}
+  interfaceSound: {fileID: 8300000, guid: 860934f702d4a034593a5509eb3b6a02, type: 3}
