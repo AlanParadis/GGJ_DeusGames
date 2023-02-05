@@ -17017,6 +17017,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30336784, guid: d6e1ef0523fa78e45bc2771307f9366c, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 30336784, guid: d6e1ef0523fa78e45bc2771307f9366c, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 30336784, guid: d6e1ef0523fa78e45bc2771307f9366c, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 30336784, guid: d6e1ef0523fa78e45bc2771307f9366c, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 30336785, guid: d6e1ef0523fa78e45bc2771307f9366c, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
