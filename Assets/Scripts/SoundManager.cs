@@ -14,6 +14,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] public AudioClip waterSplash;
     [SerializeField] public AudioClip rakeHit;
     [SerializeField] public AudioClip soilSplash;
+    [SerializeField] public AudioClip itemObtain;
+    [SerializeField] public AudioClip interfaceSound;
     
     private void Awake()
     {

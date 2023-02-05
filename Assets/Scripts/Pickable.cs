@@ -21,6 +21,8 @@ public class Pickable : MonoBehaviour, IInteractable
             Destroy(gameObject);
         else
             item = it;
+        
+        SoundManager.Instance.PlaySound(SoundManager.Instance.itemObtain, transform.position, 0.3f, false);
     }
 
     public void SetInteractionText()
