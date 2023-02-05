@@ -30,6 +30,7 @@ public class RosePlant : Plant
     void RoseAction(GameObject _go)
     {
         float dist = Vector3.Distance(transform.position, _go.transform.position);
+        //Debug.Log("update dist");
         anim.SetFloat("Dist", dist);
         if (dist < distMin)
             transform.LookAt(_go.transform.position);
@@ -38,6 +39,7 @@ public class RosePlant : Plant
     protected override void DoPlantAction()
     {
         base.DoPlantAction();
+        
         if (plantHost.nearest != null)
         {
             float distMobs = Vector3.Distance(transform.position, plantHost.nearest.transform.position);

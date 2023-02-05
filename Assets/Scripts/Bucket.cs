@@ -32,6 +32,8 @@ public class Bucket : Holdable
         go.transform.position = transform.position;
 
         go.GetComponent<WaterBall>().Throw(owner.LookDir * 10f);
+        
+        SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position, 0.5f, false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,6 +42,8 @@ public class Bucket : Holdable
         {
             filled = true;
             waterVisual.SetActive(true);
+            
+            SoundManager.Instance.PlaySound(SoundManager.Instance.waterSplash, transform.position, 0.5f, false, 0.8f);
         }
     }
 }

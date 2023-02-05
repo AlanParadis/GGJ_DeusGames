@@ -26,7 +26,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(AudioClip _clip, Vector3 pos, float _volume = 1.0f, bool is3D = true)
+    public void PlaySound(AudioClip _clip, Vector3 pos, float _volume = 1.0f, bool is3D = true, float _pitch = 1.0f)
     {
         if (_clip == null)
         {
@@ -57,6 +57,7 @@ public class SoundManager : MonoBehaviour
 
         emptyAudioSource.clip = _clip;
         emptyAudioSource.volume = _volume;
+        emptyAudioSource.pitch = _pitch;
         //3d
         if(is3D)
             emptyAudioSource.spatialBlend = 1.0f;
